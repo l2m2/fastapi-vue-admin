@@ -1,0 +1,13 @@
+[flake8]
+exclude = .git,__pycache__,__init__.py,.mypy_cache,.pytest_cache
+ignore =
+  # E111: indentation is not a multiple of four
+  E111,
+  # E114: indentation is not a multiple of four (comment)
+  E114,
+  # E121: continuation line under-indented for hanging indent
+  E121,
+per-file-ignores = 
+  # imported but unused
+  base.py: F401
+  __init__.py: F401

@@ -1,8 +1,29 @@
 {
-    "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true
-    },
-    "eslint.workingDirectories": [
-        { "mode": "auto" }
-    ]
+  "python.autoComplete.extraPaths": [
+    "./backend/app"
+  ],
+  "python.envFile": "${workspaceFolder}/.env",
+  "terminal.integrated.env.osx": {
+    "PYTHONPATH": "${env:PYTHONPATH}:${workspaceFolder}/backend/app",
+  },
+  "terminal.integrated.env.linux": {
+    "PYTHONPATH": "${env:PYTHONPATH}:${workspaceFolder}/backend/app",
+  },
+  "terminal.integrated.env.windows": {
+    "PYTHONPATH": "${env:PYTHONPATH}:${workspaceFolder}/backend/app",
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.workingDirectories": [
+    {
+      "mode": "auto"
+    }
+  ],
+  "[python]": {
+    "editor.formatOnSave": true
+  },
+  "python.formatting.provider": "yapf",
+  "python.linting.enabled": true,
+  "python.linting.flake8Enabled": true
 }
