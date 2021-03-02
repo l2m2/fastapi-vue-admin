@@ -35,7 +35,6 @@ class Settings(BaseSettings):
 
   FIRST_SUPERUSER: str
   FIRST_SUPERUSER_PASSWORD: str
-  USERS_OPEN_REGISTRATION: bool = False
 
 
 settings = Settings()

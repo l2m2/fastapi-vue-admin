@@ -13,15 +13,15 @@ class UserBase(BaseModel):
 
 
 # Properties to receive via API on creation
-class UserCreateReq(UserBase):
+class UserCreate(UserBase):
   username: str
   password: str
 
 
 # Properties to receive via API on update
-class UserUpdateReq(UserBase):
+class UserUpdate(UserBase):
   password: Optional[str] = None
 
 
-class UserRes(UserBase):
+class User(UserBase):
   id: Optional[int] = None
