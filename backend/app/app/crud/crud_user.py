@@ -10,14 +10,14 @@ from app.schemas.user import UserCreateReq, UserUpdateReq
 
 class CRUDUser(CRUDBase[User, UserCreateReq, UserUpdateReq]):
   def get_by_username(self, db: Session, *, username: str) -> Optional[User]:
-    return db.query(User).filter(User.username == username)
+    return db.query(User).filter(User.username == username).first()
 
   def create(self, db: Session, *, obj_in: UserCreateReq) -> User:
     db_obj = User(
       username=obj_in.username,
       email=obj_in.email,
       password=get_password_hash(obj_in.password),
-      nickname=obj_in.nickname,
+      fullname=obj_in.fullname,
       is_superuser=obj_in.is_superuser,
     )
     db.add(db_obj)

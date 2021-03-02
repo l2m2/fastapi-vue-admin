@@ -1,5 +1,6 @@
 #! /usr/bin/env bash
 
+cd app
 # Let the DB start
 python app/backend_pre_start.py
 
