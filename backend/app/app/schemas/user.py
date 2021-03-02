@@ -25,3 +25,8 @@ class UserUpdate(UserBase):
 
 class User(UserBase):
   id: Optional[int] = None
+
+  class Config:
+    # Pydantic's orm_mode will tell the Pydantic model to read the data even if it is not a dict,
+    #  but an ORM model (or any other arbitrary object with attributes).
+    orm_mode = True
