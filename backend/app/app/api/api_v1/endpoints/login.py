@@ -41,7 +41,7 @@ def test_token(current_user: models.User = Depends(deps.get_current_user)) -> An
   return current_user
 
 
-@router.post("/reset-password/", response_model=schemas.MsgRes)
+@router.post("/reset-password/", response_model=schemas.Msg)
 def reset_password(
     token: str = Body(...),
     new_password: str = Body(...),
