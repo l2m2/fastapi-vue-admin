@@ -50,10 +50,10 @@ def reset_password(
   """
   Reset password
   """
-  email = verify_password_reset_token(token)
-  if not email:
+  id = verify_password_reset_token(token)
+  if not id:
     raise HTTPException(status_code=400, detail="Invalid token")
-  user = crud.user.get_by_email(db, email=email)
+  user = crud.user.get_by_id(db, id=id)
   if not user:
     raise HTTPException(
       status_code=404,
@@ -62,7 +62,7 @@ def reset_password(
   elif not crud.user.is_active(user):
     raise HTTPException(status_code=400, detail="Inactive user")
   hashed_password = get_password_hash(new_password)
-  user.hashed_password = hashed_password
+  user.password = hashed_password
   db.add(user)
   db.commit()
   return {"msg": "Password updated successfully"}
