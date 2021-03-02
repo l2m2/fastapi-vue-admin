@@ -21,7 +21,7 @@ def login_access_token(db: Session = Depends(deps.get_db), form_data: OAuth2Pass
   """
     OAuth2 compatible token login, get an access token for future requests
     """
-  user = crud.user.authenticate(db, email=form_data.username, password=form_data.password)
+  user = crud.user.authenticate(db, username=form_data.username, password=form_data.password)
   if not user:
     raise HTTPException(status_code=400, detail="Incorrect email or password")
   elif not crud.user.is_active(user):
