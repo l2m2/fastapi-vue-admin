@@ -1,17 +1,18 @@
-from typing import Any, Dict, Generic, List, Optional, Type, TypeVar, Union
+from typing import Any, Dict, Generic, Optional, Type, TypeVar, Union
 
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
-
+from sqlalchemy import text
 from app.db.base_class import Base
 
 ModelType = TypeVar("ModelType", bound=Base)
 CreateSchemaType = TypeVar("CreateSchemaType", bound=BaseModel)
 UpdateSchemaType = TypeVar("UpdateSchemaType", bound=BaseModel)
+ModelListType = TypeVar("ModelListType", bound=BaseModel)
 
 
-class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
+class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType, ModelListType]):
   def __init__(self, model: Type[ModelType]):
     """
     CRUD object with default methods to Create, Read, Update, Delete (CRUD).
@@ -26,8 +27,11 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
   def get(self, db: Session, id: Any) -> Optional[ModelType]:
     return db.query(self.model).filter(self.model.id == id).first()
 
-  def get_multi(self, db: Session, *, skip: int = 0, limit: int = 100) -> List[ModelType]:
-    return db.query(self.model).offset(skip).limit(limit).all()
+  def get_multi(self, db: Session, *, skip: int = 0, limit: int = 100, filter: str = '', order: str = '') -> ModelListType:
+    q = db.query(self.model).filter(text(filter))
+    total = q.count()
+    items = q.order_by(text(order)).offset(skip).limit(limit).all()
+    return {'total': total, 'items': items}
 
   def create(self, db: Session, *, obj_in: CreateSchemaType) -> ModelType:
     obj_in_data = jsonable_encoder(obj_in)

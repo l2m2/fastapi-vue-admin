@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, List
 
 from pydantic import BaseModel, EmailStr
 
@@ -30,3 +30,8 @@ class User(UserBase):
     # Pydantic's orm_mode will tell the Pydantic model to read the data even if it is not a dict,
     #  but an ORM model (or any other arbitrary object with attributes).
     orm_mode = True
+
+
+class UserList(BaseModel):
+  total: int
+  items: List[User]
