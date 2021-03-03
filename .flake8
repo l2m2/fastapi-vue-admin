@@ -8,7 +8,3 @@ ignore =
   E114,
   # E121: continuation line under-indented for hanging indent
   E121,
-per-file-ignores = 
-  # imported but unused
-  base.py: F401
-  __init__.py: F401
