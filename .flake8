@@ -1,5 +1,5 @@
 [flake8]
-max-line-length = 120
+max-line-length = 140
 exclude = .git,__pycache__,__init__.py,.mypy_cache,.pytest_cache
 ignore =
   # E111: indentation is not a multiple of four
