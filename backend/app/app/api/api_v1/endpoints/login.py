@@ -53,7 +53,7 @@ def reset_password(
   id = verify_password_reset_token(token)
   if not id:
     raise HTTPException(status_code=400, detail="Invalid token")
-  user = crud.user.get_by_id(db, id=id)
+  user = crud.user.get(db, id=id)
   if not user:
     raise HTTPException(
       status_code=404,
