@@ -9,10 +9,10 @@ from app.db.base_class import Base
 ModelType = TypeVar("ModelType", bound=Base)
 CreateSchemaType = TypeVar("CreateSchemaType", bound=BaseModel)
 UpdateSchemaType = TypeVar("UpdateSchemaType", bound=BaseModel)
-ModelListType = TypeVar("ModelListType", bound=BaseModel)
+ModelListSchemaType = TypeVar("ModelListSchemaType", bound=BaseModel)
 
 
-class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType, ModelListType]):
+class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType, ModelListSchemaType]):
   def __init__(self, model: Type[ModelType]):
     """
     CRUD object with default methods to Create, Read, Update, Delete (CRUD).
@@ -27,7 +27,7 @@ class CRUDBase(Generic[ModelType, CreateSchemaType, UpdateSchemaType, ModelListT
   def get(self, db: Session, id: Any) -> Optional[ModelType]:
     return db.query(self.model).filter(self.model.id == id).first()
 
-  def get_multi(self, db: Session, *, skip: int = 0, limit: int = 100, filter: str = '', order: str = '') -> ModelListType:
+  def get_multi(self, db: Session, *, skip: int = 0, limit: int = 100, filter: str = '', order: str = '') -> ModelListSchemaType:
     q = db.query(self.model).filter(text(filter))
     total = q.count()
     items = q.order_by(text(order)).offset(skip).limit(limit).all()

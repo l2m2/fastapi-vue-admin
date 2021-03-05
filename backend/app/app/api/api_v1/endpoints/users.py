@@ -20,7 +20,7 @@ def read_users(
     current_user: models.User = Depends(deps.get_current_active_superuser),
 ) -> Any:
   """
-  Retrieve users.
+  获取用户列表
   """
   users = crud.user.get_multi(db, skip=skip, limit=limit, filter=filter, order=order)
   return users
@@ -34,7 +34,7 @@ def create_user(
     current_user: models.User = Depends(deps.get_current_active_superuser),
 ) -> Any:
   """
-  Create new user.
+  创建用户
   """
   user = crud.user.get_by_username(db, username=user_in.username)
   if user:
@@ -56,7 +56,7 @@ def update_user_me(
     current_user: models.User = Depends(deps.get_current_active_user),
 ) -> Any:
   """
-  Update own user.
+  更新当前用户信息
   """
   current_user_data = jsonable_encoder(current_user)
   user_in = schemas.UserUpdate(**current_user_data)
@@ -76,7 +76,7 @@ def read_user_me(
     current_user: models.User = Depends(deps.get_current_active_user),
 ) -> Any:
   """
-  Get current user.
+  获取当前用户信息
   """
   return current_user
 
@@ -88,7 +88,7 @@ def read_user_by_id(
     db: Session = Depends(deps.get_db),
 ) -> Any:
   """
-  Get a specific user by id.
+  根据ID获取用户信息
   """
   user = crud.user.get(db, id=user_id)
   if user == current_user:
@@ -107,13 +107,13 @@ def update_user(
     current_user: models.User = Depends(deps.get_current_active_superuser),
 ) -> Any:
   """
-  Update a user.
+  更新用户信息
   """
   user = crud.user.get(db, id=user_id)
   if not user:
     raise HTTPException(
       status_code=404,
-      detail="The user with this username does not exist in the system",
+      detail="用户不存在",
     )
   user = crud.user.update(db, db_obj=user, obj_in=user_in)
   return user
