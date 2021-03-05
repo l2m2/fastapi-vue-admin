@@ -62,7 +62,7 @@ def update_role(*,
   return role
 
 
-@router.delete("/{role_id}")
+@router.delete("/{role_id}", response_model=schemas.Role)
 def delete_role(*, db: Session = Depends(deps.get_db), role_id: int,
                 current_user: models.User = Depends(deps.get_current_active_superuser)) -> Any:
   """
