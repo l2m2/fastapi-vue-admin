@@ -4,6 +4,7 @@ import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
 import "./plugins/antd";
+import "./plugins/antdpro";
 
 Vue.config.productionTip = false;
 
