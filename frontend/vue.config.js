@@ -77,9 +77,20 @@ const vueConfig = {
 
   // disable source map in production
   productionSourceMap: false,
+
   lintOnSave: undefined,
+
   // babel-loader no-ignore node_modules/*
-  transpileDependencies: []
+  transpileDependencies: [],
+
+  pluginOptions: {
+    i18n: {
+      locale: "en",
+      fallbackLocale: "en",
+      localeDir: "locales",
+      enableInSFC: false
+    }
+  }
 };
 
 module.exports = vueConfig;
