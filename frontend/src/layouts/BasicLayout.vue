@@ -11,7 +11,7 @@
   >
     <template v-slot:menuHeaderRender>
       <div>
-        <!-- <logo-svg /> -->
+        <logo-svg />
         <h1>{{ title }}</h1>
       </div>
     </template>
@@ -27,10 +27,12 @@
 <script>
 import { SettingDrawer } from "@ant-design-vue/pro-layout";
 import defaultSettings from "@/config/defaultSettings";
+import LogoSvg from "../assets/logo.svg?inline";
 export default {
   name: "BasicLayout",
   components: {
-    SettingDrawer
+    SettingDrawer,
+    LogoSvg
   },
   data() {
     return {
