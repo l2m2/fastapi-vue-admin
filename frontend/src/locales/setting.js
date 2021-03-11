@@ -8,6 +8,7 @@ export default {
   "app.setting.content-width": { en: "Content Width", zhcn: "内容区域宽度" },
   "app.setting.fixedheader": { en: "Fixed Header", zhcn: "固定 Header" },
   "app.setting.fixedsidebar": { en: "Fixed Sidebar", zhcn: "固定侧边栏" },
+  "app.setting.fixedsidebar.hint": { en: "Fixed Sidebar", zhcn: "固定侧边栏" },
   "app.setting.sidemenu": { en: "Side Menu Layout", zhcn: "侧边菜单布局" },
   "app.setting.topmenu": { en: "Top Menu Layout", zhcn: "顶部菜单布局" },
   "app.setting.content-width.fixed": { en: "Fixed", zhcn: "Fixed" },
