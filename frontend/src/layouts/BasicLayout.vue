@@ -3,7 +3,9 @@
     :collapsed="collapsed"
     :menus="menus"
     :isMobile="isMobile"
+    :mediaQuery="query"
     :handleCollapse="handleCollapse"
+    :handleMediaQuery="handleMediaQuery"
     v-bind="settings"
     :i18nRender="i18nRender"
   >
@@ -45,6 +47,7 @@ export default {
         hideHintAlert: false,
         hideCopyButton: false
       },
+      query: {},
       isMobile: false
     };
   },
@@ -54,6 +57,18 @@ export default {
     },
     handleCollapse(val) {
       this.collapsed = val;
+    },
+    handleMediaQuery(query) {
+      this.query = query;
+      if (this.isMobile && !query["screen-xs"]) {
+        this.isMobile = false;
+        return;
+      }
+      if (!this.isMobile && query["screen-xs"]) {
+        this.isMobile = true;
+        this.collapsed = false;
+        this.settings.contentWidth = "Fluid";
+      }
     },
     handleSettingChange({ type, value }) {
       type && (this.settings[type] = value);
