@@ -11,6 +11,5 @@ export default {
   },
   title: "FastAPI Vue Admin",
   pwa: false,
-  iconfontUrl: "",
-  production: process.env.NODE_ENV === "production"
+  iconfontUrl: ""
 };

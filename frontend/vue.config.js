@@ -3,6 +3,7 @@ const webpack = require("webpack");
 const GitRevisionPlugin = require("git-revision-webpack-plugin");
 const GitRevision = new GitRevisionPlugin();
 const buildDate = JSON.stringify(new Date().toLocaleString());
+const createThemeColorReplacerPlugin = require("./config/plugin.config");
 
 function resolve(dir) {
   return path.join(__dirname, dir);
@@ -92,5 +93,11 @@ const vueConfig = {
     }
   }
 };
+
+// preview.pro.loacg.com only do not use in your production;
+if (process.env.NODE_ENV !== "production") {
+  // add `ThemeColorReplacer` plugin to webpack plugins
+  vueConfig.configureWebpack.plugins.push(createThemeColorReplacerPlugin());
+}
 
 module.exports = vueConfig;

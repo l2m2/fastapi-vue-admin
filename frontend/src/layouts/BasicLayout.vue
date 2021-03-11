@@ -15,7 +15,11 @@
         <h1>{{ title }}</h1>
       </div>
     </template>
-    <setting-drawer :settings="settings" @change="handleSettingChange">
+    <setting-drawer
+      v-if="!isProduction"
+      :settings="settings"
+      @change="handleSettingChange"
+    >
     </setting-drawer>
   </pro-layout>
 </template>
@@ -30,6 +34,7 @@ export default {
   },
   data() {
     return {
+      isProduction: process.env.NODE_ENV === "production",
       title: defaultSettings.title,
       collapsed: false,
       menus: [],
