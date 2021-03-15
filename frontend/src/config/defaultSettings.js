@@ -5,11 +5,9 @@ export default {
   contentWidth: "Fluid", // layout of content: `Fluid` or `Fixed`, only works when layout is topmenu
   fixedHeader: false, // sticky header
   fixSiderbar: false, // sticky siderbar
-  colorWeak: false, // 色盲模式
+  colorWeak: false, // 色弱模式
   menu: {
     locale: true
   },
-  title: "FastAPI Vue Admin",
-  pwa: false,
-  iconfontUrl: ""
+  title: "FastAPI Vue Admin"
 };
