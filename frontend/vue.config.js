@@ -21,6 +21,16 @@ function getGitHash() {
 
 // vue.config.js
 const vueConfig = {
+  pwa: {
+    iconPaths: {
+      favicon32: "logo.png",
+      favicon16: "logo.png",
+      appleTouchIcon: "logo.png",
+      maskIcon: "logo.png",
+      msTileImage: "logo.png"
+    }
+  },
+
   configureWebpack: {
     // webpack plugins
     plugins: [
