@@ -18,15 +18,12 @@ export default {
   "app.setting.copy": { en: "Copy Setting", zhcn: "拷贝设置" },
   "app.setting.loading": { en: "Loading theme", zhcn: "加载主题中" },
   "app.setting.copyinfo": {
-    en:
-      "copy success，please replace defaultSettings in src/config/defaultSettings.js",
+    en: "copy success，please replace defaultSettings in src/config/defaultSettings.js",
     zhcn: "拷贝设置成功 src/config/defaultSettings.js"
   },
   "app.setting.production.hint": {
-    en:
-      "Setting panel shows in development environment only, please manually modify",
-    zhcn:
-      "配置栏只在开发环境用于预览，生产环境不会展现，请拷贝后手动修改配置文件"
+    en: "Setting panel shows in development environment only, please manually modify",
+    zhcn: "配置栏只在开发环境用于预览，生产环境不会展现，请拷贝后手动修改配置文件"
   },
   "app.setting.themecolor.daybreak": { en: "Daybreak Blue", zhcn: "拂晓蓝" },
   "app.setting.themecolor.dust": { en: "Dust Red", zhcn: "薄暮" },

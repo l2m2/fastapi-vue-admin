@@ -15,12 +15,7 @@
         <h1>{{ title }}</h1>
       </div>
     </template>
-    <setting-drawer
-      v-if="!isProduction"
-      :settings="settings"
-      @change="handleSettingChange"
-    >
-    </setting-drawer>
+    <setting-drawer v-if="!isProduction" :settings="settings" @change="handleSettingChange"> </setting-drawer>
   </pro-layout>
 </template>
 
@@ -42,10 +37,7 @@ export default {
       menus: [],
       settings: {
         layout: defaultSettings.layout,
-        contentWidth:
-          defaultSettings.layout === "sidemenu"
-            ? "Fluid"
-            : defaultSettings.contentWidth,
+        contentWidth: defaultSettings.layout === "sidemenu" ? "Fluid" : defaultSettings.contentWidth,
         theme: defaultSettings.navTheme,
         primaryColor: defaultSettings.primaryColor,
         fixedHeader: defaultSettings.fixedHeader,

@@ -8,9 +8,7 @@ const langs = process.env.VUE_APP_LANGS.split(",");
 
 function load(conf, lang, result) {
   for (let k in conf) {
-    if (
-      langs.every(item => Object.prototype.hasOwnProperty.call(conf[k], item))
-    ) {
+    if (langs.every(item => Object.prototype.hasOwnProperty.call(conf[k], item))) {
       result[k] = conf[k][lang];
     } else {
       result[k] = {};
