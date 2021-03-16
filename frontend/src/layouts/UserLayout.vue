@@ -21,9 +21,9 @@
 
         <div class="footer">
           <div class="links">
-            <a href="_self">帮助</a>
-            <a href="_self">隐私</a>
-            <a href="_self">条款</a>
+            <a href="_self">{{ $t("layouts.userLayout.help") }}</a>
+            <a href="_self">{{ $t("layouts.userLayout.privacy") }}</a>
+            <a href="_self">{{ $t("layouts.userLayout.terms") }}</a>
           </div>
           <div class="copyright">Copyright &copy; {{ new Date().getFullYear() }} L2M2</div>
         </div>
