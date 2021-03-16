@@ -8,6 +8,8 @@ import "./plugins/antdpro";
 import i18n from "./plugins/i18n";
 import themePluginConfig from "../config/themePluginConfig";
 
+import "./global.less";
+
 Vue.config.productionTip = false;
 
 window.umi_plugin_ant_themeVar = themePluginConfig.theme;
