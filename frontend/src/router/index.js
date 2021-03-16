@@ -6,7 +6,11 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    component: () => import("@/layouts/BasicLayout")
+    component: () => import("@/layouts/UserLayout")
+  },
+  {
+    path: "/404",
+    component: () => import("@/views/exception/404")
   }
 ];
 

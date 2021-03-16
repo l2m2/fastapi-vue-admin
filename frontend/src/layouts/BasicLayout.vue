@@ -26,7 +26,7 @@
 
 <script>
 import { SettingDrawer } from "@ant-design-vue/pro-layout";
-import defaultSettings from "@/config/defaultSettings";
+import defaultSettings from "@/config/default-settings";
 import LogoSvg from "../assets/logo.svg?inline";
 export default {
   name: "BasicLayout",

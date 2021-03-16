@@ -8,6 +8,5 @@ export default {
   colorWeak: false, // 色弱模式
   menu: {
     locale: true
-  },
-  title: "FastAPI Vue Admin"
+  }
 };

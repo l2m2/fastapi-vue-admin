@@ -1,4 +1,7 @@
 export default {
+  app: {
+    name: { en: "Cute sheep", zhcn: "乖乖吃草" }
+  },
   dialog: {
     delete: {
       title: { en: "Delete", zhcn: "删除" },

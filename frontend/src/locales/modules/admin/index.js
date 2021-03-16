@@ -1,9 +1,5 @@
-import user from "./user";
-// import role from "./role";
-// import securityLog from "./security-log";
+import user from "./user.i18n";
 
 export default {
   user
-  // role,
-  // "security-log": securityLog
 };
