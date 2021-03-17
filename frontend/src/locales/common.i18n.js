@@ -12,5 +12,8 @@ export default {
       yes: { en: "Delete", zhcn: "删除" },
       no: { en: "Cancel", zhcn: "取消" }
     }
+  },
+  validate: {
+    required: { en: "The field is required.", zhcn: "必填项" }
   }
 };

@@ -9,8 +9,16 @@ const routes = [
     component: () => import("@/layouts/UserLayout")
   },
   {
-    path: "/404",
-    component: () => import("@/views/exception/404")
+    path: "/user",
+    redirect: "/user/login",
+    component: () => import("@/layouts/UserLayout"),
+    children: [
+      {
+        path: "login",
+        name: "login",
+        component: () => import("@/views/login/Login")
+      }
+    ]
   }
 ];
 
