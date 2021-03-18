@@ -9,4 +9,4 @@ python gen.py
 2. 解析JSON按前端要求生成JS文件
 
 ## 注意
-- 运行此脚本会直接覆盖`frontend/src/api`下的所有文件
+- 运行此脚本会直接覆盖 `frontend/src/api` 下的所有文件
