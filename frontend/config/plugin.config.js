@@ -7,9 +7,7 @@ const getAntdSerials = color => {
     return ThemeColorReplacer.varyColor.lighten(color, i / 10);
   });
   const colorPalettes = generate(color);
-  const rgb = ThemeColorReplacer.varyColor
-    .toNum3(color.replace("#", ""))
-    .join(",");
+  const rgb = ThemeColorReplacer.varyColor.toNum3(color.replace("#", "")).join(",");
   return lightens.concat(colorPalettes).concat(rgb);
 };
 
@@ -20,10 +18,7 @@ const themePluginOption = {
   changeSelector(selector) {
     switch (selector) {
       case ".ant-calendar-today .ant-calendar-date":
-        return (
-          ":not(.ant-calendar-selected-date):not(.ant-calendar-selected-day)" +
-          selector
-        );
+        return ":not(.ant-calendar-selected-date):not(.ant-calendar-selected-day)" + selector;
       case ".ant-btn:focus,.ant-btn:hover":
         return ".ant-btn:focus:not(.ant-btn-primary):not(.ant-btn-danger),.ant-btn:hover:not(.ant-btn-primary):not(.ant-btn-danger)";
       case ".ant-btn.active,.ant-btn:active":
@@ -34,8 +29,11 @@ const themePluginOption = {
       // fixed https://github.com/vueComponent/ant-design-vue-pro/issues/876
       case ".ant-steps-item-process .ant-steps-item-icon":
         return ":not(.ant-steps-item-custom)" + selector;
+      // eslint-disable-next-line
       case ".ant-menu-horizontal>.ant-menu-item-active,.ant-menu-horizontal>.ant-menu-item-open,.ant-menu-horizontal>.ant-menu-item-selected,.ant-menu-horizontal>.ant-menu-item:hover,.ant-menu-horizontal>.ant-menu-submenu-active,.ant-menu-horizontal>.ant-menu-submenu-open,.ant-menu-horizontal>.ant-menu-submenu-selected,.ant-menu-horizontal>.ant-menu-submenu:hover":
+      // eslint-disable-next-line
       case ".ant-menu-horizontal > .ant-menu-item-active,.ant-menu-horizontal > .ant-menu-item-open,.ant-menu-horizontal > .ant-menu-item-selected,.ant-menu-horizontal > .ant-menu-item:hover,.ant-menu-horizontal > .ant-menu-submenu-active,.ant-menu-horizontal > .ant-menu-submenu-open,.ant-menu-horizontal > .ant-menu-submenu-selected,.ant-menu-horizontal > .ant-menu-submenu:hover":
+        // eslint-disable-next-line
         return ".ant-menu-horizontal > .ant-menu-item-active,.ant-menu-horizontal > .ant-menu-item-open,.ant-menu-horizontal > .ant-menu-item-selected,.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item:hover,.ant-menu-horizontal > .ant-menu-submenu-active,.ant-menu-horizontal > .ant-menu-submenu-open,.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-selected,.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu:hover";
       case ".ant-menu-horizontal > .ant-menu-item-selected > a":
       case ".ant-menu-horizontal>.ant-menu-item-selected>a":
@@ -49,7 +47,6 @@ const themePluginOption = {
   }
 };
 
-const createThemeColorReplacerPlugin = () =>
-  new ThemeColorReplacer(themePluginOption);
+const createThemeColorReplacerPlugin = () => new ThemeColorReplacer(themePluginOption);
 
 module.exports = createThemeColorReplacerPlugin;
