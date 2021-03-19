@@ -43,6 +43,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -53,16 +54,24 @@ export default {
     };
   },
   methods: {
+    ...mapActions("user", ["login"]),
     handleSubmit(e) {
       e.preventDefault();
       const {
         form: { validateFields },
-        state
+        state,
+        login
       } = this;
       state.loading = true;
       validateFields((err, values) => {
         if (!err) {
-          console.log("login form", values);
+          login(values)
+            .then(() => {
+              console.log("登录成功");
+            })
+            .finally(() => {
+              state.loading = false;
+            });
         } else {
           this.$nextTick(() => {
             state.loading = false;
