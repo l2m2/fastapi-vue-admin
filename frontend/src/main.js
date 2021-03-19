@@ -6,7 +6,7 @@ import store from "./store";
 import "./plugins/antd";
 import "./plugins/antdpro";
 import i18n from "./plugins/i18n";
-import themePluginConfig from "../config/themePluginConfig";
+import themePluginConfig from "../config/theme-plugin.config";
 
 import "./global.less";
 
