@@ -82,7 +82,7 @@ def _get_index_js_content(tags):
   content_lines = []
   for tag in tags:
     import_lines.append(f"import {tag} from \"./{tag}.api\";")
-    content_lines.append(f"  ...{tag}")
+    content_lines.append(f"  {tag}")
 
   index_lines = import_lines
   index_lines.append("")
