@@ -16,6 +16,7 @@
       </div>
     </template>
     <setting-drawer v-if="!isProduction" :settings="settings" @change="handleSettingChange"> </setting-drawer>
+    <router-view />
   </pro-layout>
 </template>
 
