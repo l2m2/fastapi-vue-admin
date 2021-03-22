@@ -57,7 +57,7 @@ def update_permission(*,
   """
   item = crud.permission.get_by_code(db, code=code)
   if not item:
-    raise HTTPException(status_code=404, detail="角色不存在")
+    raise HTTPException(status_code=404, detail="权限不存在")
   item = crud.permission.update(db, db_obj=item, obj_in=obj_in)
   return item
 
