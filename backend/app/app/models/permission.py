@@ -7,7 +7,7 @@ class Permission(Base):
   __tablename__ = "sys_permission"
 
   code = Column(String(20), primary_key=True, index=True)
-  conf = Column(postgresql.JSONB, nullable=False)
+  conf = Column(postgresql.JSONB)
 
   def __repr__(self):
     return f"<Permission(Code={self.code})>"
