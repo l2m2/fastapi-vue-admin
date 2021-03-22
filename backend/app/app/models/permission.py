@@ -6,7 +6,7 @@ from app.db.base import Base
 class Permission(Base):
   __tablename__ = "sys_permission"
 
-  code = Column(String(20), primary_key=True, index=True)
+  code = Column(String(255), primary_key=True, index=True)
   conf = Column(postgresql.JSONB)
 
   def __repr__(self):
