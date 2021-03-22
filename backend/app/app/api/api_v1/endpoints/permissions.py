@@ -47,11 +47,11 @@ def read_permission_by_code(
 
 
 @router.put("/{code}", response_model=schemas.Permission)
-def update_role(*,
-                db: Session = Depends(deps.get_db),
-                code: str,
-                obj_in: schemas.PermissionUpdate,
-                current_user: models.User = Depends(deps.get_current_active_user)) -> Any:
+def update_permission(*,
+                      db: Session = Depends(deps.get_db),
+                      code: str,
+                      obj_in: schemas.PermissionUpdate,
+                      current_user: models.User = Depends(deps.get_current_active_user)) -> Any:
   """
   更新权限信息
   """
@@ -63,8 +63,10 @@ def update_role(*,
 
 
 @router.delete("/{code}", response_model=schemas.Permission)
-def delete_role(*, db: Session = Depends(deps.get_db), code: str,
-                current_user: models.User = Depends(deps.get_current_active_superuser)) -> Any:
+def delete_permission(*,
+                      db: Session = Depends(deps.get_db),
+                      code: str,
+                      current_user: models.User = Depends(deps.get_current_active_superuser)) -> Any:
   """
   删除权限
   """
