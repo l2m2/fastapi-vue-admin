@@ -2,6 +2,11 @@ export default {
   app: {
     name: { en: "Cute sheep", zhcn: "乖乖吃草" }
   },
+  action: {
+    default: { en: "Action", zhcn: "操作" },
+    delete: { en: "Delete", zhcn: "删除" },
+    edit: { en: "Edit", zhcn: "编辑" }
+  },
   dialog: {
     delete: {
       title: { en: "Delete", zhcn: "删除" },
