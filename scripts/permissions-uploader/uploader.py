@@ -32,22 +32,20 @@ def _get_all_permissions_code():
                 items.append("update")
               elif crud_item == "D":
                 items.append("delete")
-      items = [f"{prefix}/{x}" for x in items]
-      total = total + items
+      total = total + [f"{prefix}/{x}" for x in items]
   return total
 
 
 def upload(options):
   codes = _get_all_permissions_code()
-  codes = [(x, ) for x in codes]
   if not codes:
     print("no permission conf found.")
     return
+  codes = [(x, ) for x in codes]
   conn = psycopg2.connect(**options)
   cursor = conn.cursor()
   try:
     cursor.execute("DELETE FROM sys_permission")
-    print(f"codes: {codes}")
     psycopg2.extras.execute_values(cursor, "INSERT INTO sys_permission(code) VALUES %s", codes)
   except Exception as e:  # noqa: E722
     print(e)
