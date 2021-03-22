@@ -67,7 +67,7 @@ export default {
         if (!err) {
           login(values)
             .then(() => {
-              console.log("登录成功");
+              this.$router.push({ path: "/" });
             })
             .finally(() => {
               state.loading = false;
