@@ -12,7 +12,7 @@
     <template v-slot:menuHeaderRender>
       <div>
         <logo-svg />
-        <h1>{{ title }}</h1>
+        <h1>{{ $t("_.app.name") }}</h1>
       </div>
     </template>
     <setting-drawer v-if="!isProduction" :settings="settings" @change="handleSettingChange"> </setting-drawer>
@@ -32,7 +32,6 @@ export default {
   data() {
     return {
       isProduction: process.env.NODE_ENV === "production",
-      title: defaultSettings.title,
       collapsed: false,
       menus: [],
       settings: {
