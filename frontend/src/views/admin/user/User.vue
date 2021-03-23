@@ -1,24 +1,50 @@
 <template>
   <div>
-    <a-table
-      :columns="columns"
-      :row-key="record => record.id"
-      :data-source="items"
-      :pagination="pagination"
-      :loading="loading"
-      @change="handleTableChange"
-    >
-      <template slot="is_active" slot-scope="is_active">
-        <a-tag :color="is_active ? 'green' : 'gray'"> {{ is_active ? $t("user.active") : $t("user.inactive") }} </a-tag>
-      </template>
-      <template slot="is_superuser" slot-scope="is_superuser">
-        <a-tag :color="is_superuser ? 'green' : 'gray'"> {{ is_superuser ? $t("user.yes") : $t("user.no") }} </a-tag>
-      </template>
-      <template slot="action" slot-scope="text, record">
-        <a class="fv-table-action-item" @click="editItem(record)">{{ $t("_.action.edit") }}</a>
-        <a class="fv-table-action-item" @click="deleteItem(record)">{{ $t("_.action.delete") }}</a>
-      </template>
-    </a-table>
+    <a-card :title="$t('user.list-card-title')" :bordered="false" :bodyStyle="{ padding: 0 }">
+      <div slot="extra">
+        <a-button type="primary">{{ $t("_.action.new") }}</a-button>
+        <a-divider type="vertical"></a-divider>
+        <a-space>
+          <a-tooltip>
+            <template slot="title">
+              {{ $t("_.action.reload") }}
+            </template>
+            <a-icon type="reload" :style="{ fontSize: '16px' }" />
+          </a-tooltip>
+          <a-tooltip>
+            <template slot="title">
+              {{ $t("_.action.columns-setting") }}
+            </template>
+            <a-icon type="setting" :style="{ fontSize: '16px' }" />
+          </a-tooltip>
+        </a-space>
+        <a-divider type="vertical"></a-divider>
+        <a-auto-complete></a-auto-complete>
+      </div>
+      <a-table
+        :columns="columns"
+        :row-key="record => record.id"
+        :data-source="items"
+        :pagination="pagination"
+        :loading="loading"
+        @change="handleTableChange"
+      >
+        <template slot="is_active" slot-scope="is_active">
+          <a-tag :color="is_active ? 'green' : 'gray'">
+            {{ is_active ? $t("user.enum.status.active") : $t("user.enum.status.inactive") }}
+          </a-tag>
+        </template>
+        <template slot="is_superuser" slot-scope="is_superuser">
+          <span> {{ is_superuser ? $t("user.enum.is_superuser.yes") : $t("user.enum.is_superuser.no") }} </span>
+        </template>
+        <template slot="action" slot-scope="text, record">
+          <a-space>
+            <a @click="editItem(record)">{{ $t("_.action.edit") }}</a>
+            <a @click="deleteItem(record)">{{ $t("_.action.delete") }}</a>
+          </a-space>
+        </template>
+      </a-table>
+    </a-card>
   </div>
 </template>
 
@@ -79,5 +105,3 @@ export default {
   }
 };
 </script>
-
-<style></style>

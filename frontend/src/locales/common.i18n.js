@@ -4,8 +4,11 @@ export default {
   },
   action: {
     default: { en: "Action", zhcn: "操作" },
+    new: { en: "New item", zhcn: "新建" },
     delete: { en: "Delete", zhcn: "删除" },
-    edit: { en: "Edit", zhcn: "编辑" }
+    edit: { en: "Edit", zhcn: "编辑" },
+    reload: { en: "Reload", zhcn: "刷新" },
+    "columns-setting": { en: "Columns setting", zhcn: "列设置" }
   },
   dialog: {
     delete: {

@@ -44,6 +44,7 @@ import {
   Result,
   Select,
   Slider,
+  Space,
   Spin,
   Statistic,
   Steps,
@@ -102,6 +103,7 @@ Vue.use(Rate);
 Vue.use(Result);
 Vue.use(Select);
 Vue.use(Slider);
+Vue.use(Space);
 Vue.use(Spin);
 Vue.use(Statistic);
 Vue.use(Steps);
