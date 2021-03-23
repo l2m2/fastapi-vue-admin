@@ -29,8 +29,6 @@
   </validation-provider>
 </template>
 
-<style lang="scss"></style>
-
 <script>
 import { useFormElement } from "@fext/vue-use";
 
@@ -89,10 +87,9 @@ export default {
   },
 
   setup(props, context) {
-    const { dirty, isRequired, localValue, setInitialValue, updateLocalValue } = useFormElement(props, context);
+    const { dirty, localValue, setInitialValue, updateLocalValue } = useFormElement(props, context);
     return {
       dirty,
-      isRequired,
       localValue,
       setInitialValue,
       updateLocalValue
@@ -104,6 +101,11 @@ export default {
   },
 
   computed: {
+    isRequired() {
+      const { rules = {} } = this;
+      return typeof rules === "string" ? rules.includes("required") : rules.required;
+    },
+
     component() {
       return this.extend.component || "a-input";
     },
