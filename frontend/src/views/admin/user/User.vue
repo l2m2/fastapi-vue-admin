@@ -2,7 +2,7 @@
   <div>
     <a-card :title="$t('user.list-card-title')" :bordered="false" :bodyStyle="{ padding: 0 }">
       <div slot="extra">
-        <a-button type="primary">{{ $t("_.action.new") }}</a-button>
+        <a-button type="primary" @click="editItem()">{{ $t("_.action.new") }}</a-button>
         <a-divider type="vertical"></a-divider>
         <a-space>
           <a-tooltip>
@@ -44,64 +44,74 @@
           </a-space>
         </template>
       </a-table>
+      <a-modal v-model="modalVisible" :title="editedItem.id ? $t('_.action.edit') : $t('_.action.new')" @ok="save">
+        <validation-observer ref="observer">
+          <a-form :colon="false" :label-col="{ span: 4 }" :wrapper-col="{ span: 16 }">
+            <form-builder :form="form" :shares="formShares" :config="formConfig"></form-builder>
+          </a-form>
+        </validation-observer>
+      </a-modal>
     </a-card>
   </div>
 </template>
 
 <script>
+import { useForm } from "@fext/vue-use";
 import dataTableMixin from "@/mixins/data-table.mixin";
 import API from "@/api";
+import config from "./module.config";
+import uiloader from "./detail.form";
 export default {
   mixins: [dataTableMixin],
+  setup() {
+    const form = useForm();
+    const { formValues, updateFormValues } = form;
+    return {
+      form,
+      formValues,
+      updateFormValues
+    };
+  },
   data() {
     return {
-      listApi: API.users.readUsers
+      listApi: API.users.readUsers,
+      formShares: {
+        size: "default",
+        props: { allowClear: true }
+      },
+      modalVisible: false,
+      editedItem: {}
     };
   },
   computed: {
     columns() {
-      return [
-        {
-          title: this.$t("user.username"),
-          dataIndex: "username",
-          sorter: true
-        },
-        {
-          title: this.$t("user.fullname"),
-          dataIndex: "fullname",
-          sorter: true
-        },
-        {
-          title: this.$t("user.email"),
-          dataIndex: "email",
-          sorter: true
-        },
-        {
-          title: this.$t("user.status"),
-          dataIndex: "is_active",
-          scopedSlots: { customRender: "is_active" },
-          sorter: true
-        },
-        {
-          title: this.$t("user.superuser"),
-          dataIndex: "is_superuser",
-          scopedSlots: { customRender: "is_superuser" },
-          sorter: true
-        },
-        {
-          title: this.$t("_.action.default"),
-          dataIndex: "action",
-          scopedSlots: { customRender: "action" }
-        }
-      ];
+      return config.columns(this);
+    },
+    formConfig() {
+      return uiloader(this);
     }
   },
   async mounted() {
     await this.getDataFromApi();
   },
   methods: {
-    editItem() {},
-    deleteItem() {}
+    editItem(item = {}) {
+      console.log("editItem: ", item);
+      this.editedItem = Object.assign({}, item);
+      this.modalVisible = true;
+    },
+    deleteItem(item) {
+      console.log("deleteItem: ", item);
+      this.editedItem = Object.assign({}, item);
+    },
+    async save() {
+      const valid = await this.$refs.observer.validate();
+      if (!valid) {
+        return;
+      }
+
+      this.modalVisible = false;
+    }
   }
 };
 </script>
