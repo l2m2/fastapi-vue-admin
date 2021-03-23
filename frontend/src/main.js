@@ -3,11 +3,16 @@ import App from "./App.vue";
 import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
+
+import "./plugins/composition-api";
+import "./plugins/vee-validate";
+import "./plugins/fext";
 import "./plugins/antd";
 import "./plugins/antdpro";
 import i18n from "./plugins/i18n";
 import themePluginConfig from "../config/theme-plugin.config";
 
+// import "./router/router-hook";
 import "./global.less";
 
 Vue.config.productionTip = false;
