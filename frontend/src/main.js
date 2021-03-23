@@ -6,9 +6,9 @@ import store from "./store";
 
 import "./plugins/composition-api";
 import "./plugins/vee-validate";
-import "./plugins/fext";
 import "./plugins/antd";
 import "./plugins/antdpro";
+import "./plugins/fext";
 import i18n from "./plugins/i18n";
 import themePluginConfig from "../config/theme-plugin.config";
 

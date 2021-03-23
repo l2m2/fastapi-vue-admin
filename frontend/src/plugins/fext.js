@@ -1,6 +1,6 @@
 import Vue from "vue";
-import FormBuilderPlugin from "@fext/vue-form-builder";
-import AntFormAdaptorPlugin from "@fext/vue-form-builder/lib/adaptor/antd";
+import FormBuilder from "@/components/FormBuilder/FormBuilder.vue";
+import AntFormAdaptor from "@/components/FormBuilder/AntFormAdaptor.vue";
 
-Vue.use(FormBuilderPlugin);
-Vue.use(AntFormAdaptorPlugin);
+Vue.component("form-builder", FormBuilder);
+Vue.component("ant-form-adaptor", AntFormAdaptor);
