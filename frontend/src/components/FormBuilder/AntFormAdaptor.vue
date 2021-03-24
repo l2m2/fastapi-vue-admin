@@ -24,6 +24,15 @@
           {{ item.text }}
         </a-checkbox>
       </component>
+      <component
+        v-else-if="isSwitch"
+        :is="component"
+        v-bind="props"
+        :value="localValue"
+        :checked="localValue"
+        @change="updateAntLocalValue"
+      >
+      </component>
       <component v-else :is="component" v-bind="props" :value="localValue" @change="updateAntLocalValue"> </component>
     </a-form-item>
   </validation-provider>
@@ -124,6 +133,10 @@ export default {
 
     isCheckbox() {
       return this.component === "a-checkbox-group";
+    },
+
+    isSwitch() {
+      return this.component === "a-switch";
     }
   },
 
