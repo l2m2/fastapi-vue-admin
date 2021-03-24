@@ -9,16 +9,11 @@ router = APIRouter()
 
 
 @router.get("/", response_model=schemas.PermissionList)
-def read_permissions(db: Session = Depends(deps.get_db),
-                     skip: int = 0,
-                     limit: int = 100,
-                     filter: str = '',
-                     order: str = '',
-                     current_user: models.User = Depends(deps.get_current_active_user)) -> Any:
+def read_permissions(db: Session = Depends(deps.get_db), current_user: models.User = Depends(deps.get_current_active_user)) -> Any:
   """
   获取权限列表
   """
-  permissions = crud.permission.get_multi(db, skip=skip, limit=limit, filter=filter, order=order)
+  permissions = crud.permission.get_multi(db, skip=0, limit=99999)
   return permissions
 
 
