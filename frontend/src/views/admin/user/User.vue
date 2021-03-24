@@ -9,7 +9,7 @@
             <template slot="title">
               {{ $t("_.action.reload") }}
             </template>
-            <a-icon type="reload" :style="{ fontSize: '16px' }" />
+            <a-icon type="reload" :style="{ fontSize: '16px' }" @click="getDataFromApi" />
           </a-tooltip>
           <a-tooltip>
             <template slot="title">
