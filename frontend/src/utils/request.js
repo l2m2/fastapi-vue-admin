@@ -23,16 +23,16 @@ service.interceptors.response.use(
     return res;
   },
   async error => {
-    let msg = "Unknown Error";
-    if (error.response.status === 500) {
-      msg = "Internal Server Error";
-    } else {
-      msg = error.response.data.detail;
+    const { data, statusText } = error.response;
+    let m = { message: statusText };
+    if (data && data.detail) {
+      if (typeof data.detail === "string") {
+        m.description = data.detail;
+      } else {
+        m.description = JSON.stringify(data.detail).replace(/"([^"]+)":/g, "$1:");
+      }
     }
-    notification.error({
-      message: "Error",
-      description: msg
-    });
+    notification.error(m);
     return Promise.reject(error);
   }
 );
