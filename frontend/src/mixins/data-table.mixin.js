@@ -6,7 +6,8 @@ export default {
         pageSize: 10,
         current: 1,
         total: 0,
-        showSizeChanger: true
+        showSizeChanger: true,
+        showTotal: (total, range) => this.$t("_.data-footer.page-text").format(range[0], range[1], total)
       },
       filters: null,
       sorter: {},

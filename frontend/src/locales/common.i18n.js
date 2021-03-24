@@ -10,6 +10,9 @@ export default {
     reload: { en: "Reload", zhcn: "刷新" },
     "columns-setting": { en: "Columns setting", zhcn: "列设置" }
   },
+  "data-footer": {
+    "page-text": { en: "{0}-{1} of {2}", zhcn: "{0}-{1} 共 {2}" }
+  },
   dialog: {
     delete: {
       title: { en: "Delete", zhcn: "删除" },
