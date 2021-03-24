@@ -117,3 +117,16 @@ def update_user(
     )
   user = crud.user.update(db, db_obj=user, obj_in=user_in)
   return user
+
+
+@router.delete("/{user_id}", response_model=schemas.User)
+def delete_user(*, db: Session = Depends(deps.get_db), user_id: int,
+                current_user: models.User = Depends(deps.get_current_active_superuser)):
+  """
+  删除用户
+  """
+  user = crud.user.get(db, id=user_id)
+  if not user:
+    raise HTTPException(status_code=404, detail="用户不存在")
+  user = crud.user.remove(db, id=user_id)
+  return user

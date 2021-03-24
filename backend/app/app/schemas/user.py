@@ -20,7 +20,7 @@ class UserCreate(UserBase):
 
 # Properties to receive via API on update
 class UserUpdate(UserBase):
-  password: Optional[str] = None
+  ...
 
 
 class User(UserBase):
