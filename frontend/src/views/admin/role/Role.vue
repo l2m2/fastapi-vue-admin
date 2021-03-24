@@ -51,7 +51,8 @@
             <a-button type="primary" @click="saveAuthority">{{ $t("_.action.save") }}</a-button>
           </div>
         </template>
-        <a-tree checkable :tree-data="permissionTreeData" :defaultExpandAll="true"> </a-tree>
+        <a-tree checkable :tree-data="permissionTreeData" :defaultExpandAll="true" :selectable="false" v-model="selectedPermissions">
+        </a-tree>
       </a-drawer>
     </a-card>
   </div>
@@ -91,7 +92,8 @@ export default {
       config,
       uiloader,
       drawerVisible: false,
-      permissionTreeData: []
+      permissionTreeData: [],
+      selectedPermissions: []
     };
   },
   async created() {
@@ -111,13 +113,18 @@ export default {
       const build = function(obj, flat, prefix) {
         for (let k in obj) {
           let _prefix = prefix.concat(k);
-          flat.push({ key: _prefix.join("/") });
           if (Object.keys(obj[k]).length > 0) {
-            flat[flat.length - 1]["title"] = self.$t(["permissions"].concat(..._prefix, "default").join("."));
-            flat[flat.length - 1]["children"] = [];
+            flat.push({
+              key: _prefix.join("/") + "_$dirty$", // 加上_$dirty$是为了在获取选中的权限数据时过滤掉叶子结点
+              title: self.$t(["permissions"].concat(..._prefix, "default").join(".")),
+              children: []
+            });
             build(obj[k], flat[flat.length - 1]["children"], _prefix);
           } else {
-            flat[flat.length - 1]["title"] = self.$t("permissions.action." + k);
+            flat.push({
+              key: _prefix.join("/"),
+              title: self.$t("permissions.action." + k)
+            });
           }
         }
       };
@@ -136,7 +143,11 @@ export default {
       build(codes, flat, []);
       this.permissionTreeData = flat;
     },
-    saveAuthority() {}
+    async saveAuthority() {
+      const data = this.selectedPermissions.filter(item => !/_\$dirty\$$/.test(item));
+      await API.roles.updateRolePermissionsById(this.editedItem.id, data);
+      this.drawerVisible = false;
+    }
   }
 };
 </script>

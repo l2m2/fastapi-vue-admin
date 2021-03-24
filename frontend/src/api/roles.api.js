@@ -43,6 +43,23 @@ const api = {
       url: "/roles/" + role_id,
       method: "delete"
     });
+  },
+  readRolePermissionsById: (role_id, params) => {
+    return request({
+      url: "/roles/" + role_id + "/permissions",
+      params: params,
+      method: "get"
+    });
+  },
+  updateRolePermissionsById: (role_id, data) => {
+    return request({
+      url: "/roles/" + role_id + "/permissions",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      data: data,
+      method: "put"
+    });
   }
 };
 export default api;
