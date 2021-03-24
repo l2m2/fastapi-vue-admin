@@ -58,11 +58,12 @@
 <script>
 import { useForm } from "@fext/vue-use";
 import dataTableMixin from "@/mixins/data-table.mixin";
+import normalCRUDMixin from "@/mixins/normal-crud.mixin";
 import API from "@/api";
 import config from "./module.config";
 import uiloader from "./detail.form";
 export default {
-  mixins: [dataTableMixin],
+  mixins: [dataTableMixin, normalCRUDMixin],
   setup() {
     const form = useForm();
     const { formValues, setInitialFormValues, updateFormValues } = form;
@@ -76,60 +77,20 @@ export default {
   data() {
     return {
       listApi: API.users.readUsers,
+      createApi: API.users.createUser,
+      updateApi: API.users.updateUser,
+      deleteApi: API.users.deleteUser,
       formShares: {
         size: "default",
         props: { allowClear: true }
       },
       modalVisible: false,
-      editedItem: {}
+      editedItem: {},
+      config,
+      uiloader
     };
   },
-  computed: {
-    columns() {
-      return config.columns(this);
-    },
-    formConfig() {
-      return uiloader(this);
-    }
-  },
-  watch: {
-    modalVisible(val) {
-      val || this.closeModal();
-    }
-  },
-  async mounted() {
-    this.sorter = Object.assign({}, config.defaultSorter);
-    await this.getDataFromApi();
-  },
   methods: {
-    editItem(item = config.defaultItem) {
-      this.editedItem = Object.assign({}, item);
-      this.modalVisible = true;
-      this.$nextTick(() => {
-        this.updateFormValues(this.editedItem);
-      });
-    },
-    deleteItem(item) {
-      let self = this;
-      this.editedItem = Object.assign({}, item);
-      this.$confirm({
-        title: this.$t("_.dialog.delete.title"),
-        content: this.$t("_.dialog.delete.content"),
-        okType: "danger",
-        okText: this.$t("_.dialog.delete.ok"),
-        cancelText: this.$t("_.dialog.delete.cancel"),
-        async onOk() {
-          await API.users.deleteUser(self.editedItem.id);
-          await self.getDataFromApi();
-        }
-      });
-    },
-    closeModal() {
-      this.modalVisible = false;
-      this.$nextTick(() => {
-        this.editedItem = Object.assign({}, config.defaultItem);
-      });
-    },
     async save() {
       const valid = await this.$refs.observer.validate();
       if (!valid) {
