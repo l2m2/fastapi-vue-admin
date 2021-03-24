@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException
-from typing import Any
+from typing import Any, List
 from sqlalchemy.orm import Session
 
 from app import crud, models, schemas
@@ -73,3 +73,33 @@ def delete_role(*, db: Session = Depends(deps.get_db), role_id: int,
     raise HTTPException(status_code=404, detail="角色不存在")
   role = crud.role.remove(db, id=role_id)
   return role
+
+
+@router.get("/{role_id}/permissions", response_model=List[str])
+def read_role_permissions_by_id(*,
+                                db: Session = Depends(deps.get_db),
+                                role_id: int,
+                                current_user: models.User = Depends(deps.get_current_active_superuser)):
+  """
+  读取角色的权限信息
+  """
+  role = crud.role.get(db, id=role_id)
+  if not role:
+    raise HTTPException(status_code=404, detail="角色不存在")
+  return crud.role.get_permissions_by_role_id(db, id=role_id)
+
+
+@router.put("/{role_id}/permissions")
+def update_role_permissions_by_id(*,
+                                  db: Session = Depends(deps.get_db),
+                                  role_id: int,
+                                  permissions_in: List[str],
+                                  current_user: models.User = Depends(deps.get_current_active_superuser)):
+  """
+  更新角色的权限信息
+  """
+  role = crud.role.get(db, id=role_id)
+  if not role:
+    raise HTTPException(status_code=404, detail="角色不存在")
+  crud.role.update_permissions_by_role_id(db, id=role_id, permissions=permissions_in)
+  return True
