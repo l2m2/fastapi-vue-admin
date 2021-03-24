@@ -28,7 +28,7 @@ const api = {
       method: "get"
     });
   },
-  updateRole: (code, data) => {
+  updatePermission: (code, data) => {
     return request({
       url: "/permissions/" + code,
       headers: {
@@ -38,7 +38,7 @@ const api = {
       method: "put"
     });
   },
-  deleteRole: code => {
+  deletePermission: code => {
     return request({
       url: "/permissions/" + code,
       method: "delete"

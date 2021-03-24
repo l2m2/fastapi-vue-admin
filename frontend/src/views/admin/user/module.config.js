@@ -35,6 +35,21 @@ const columns = function(self) {
   ];
 };
 
+const defaultItem = {
+  username: "",
+  fullname: "",
+  email: "",
+  is_active: true,
+  is_superuser: false
+};
+
+const defaultSorter = {
+  field: "username",
+  order: "ascend"
+};
+
 export default {
-  columns
+  columns,
+  defaultItem,
+  defaultSorter
 };

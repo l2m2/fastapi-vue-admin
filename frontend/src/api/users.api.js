@@ -54,6 +54,12 @@ const api = {
       data: data,
       method: "put"
     });
+  },
+  deleteUser: user_id => {
+    return request({
+      url: "/users/" + user_id,
+      method: "delete"
+    });
   }
 };
 export default api;

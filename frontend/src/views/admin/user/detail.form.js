@@ -12,7 +12,7 @@ export default function(self) {
           name: "fullname",
           component: "ant-form-adaptor",
           label: self.$t("user.fullname"),
-          rules: { required: true }
+          rules: "required"
         },
         {
           name: "email",

@@ -65,10 +65,11 @@ export default {
   mixins: [dataTableMixin],
   setup() {
     const form = useForm();
-    const { formValues, updateFormValues } = form;
+    const { formValues, setInitialFormValues, updateFormValues } = form;
     return {
       form,
       formValues,
+      setInitialFormValues,
       updateFormValues
     };
   },
@@ -91,26 +92,56 @@ export default {
       return uiloader(this);
     }
   },
+  watch: {
+    modalVisible(val) {
+      val || this.closeModal();
+    }
+  },
   async mounted() {
+    this.sorter = Object.assign({}, config.defaultSorter);
     await this.getDataFromApi();
   },
   methods: {
-    editItem(item = {}) {
-      console.log("editItem: ", item);
+    editItem(item = config.defaultItem) {
       this.editedItem = Object.assign({}, item);
       this.modalVisible = true;
+      this.$nextTick(() => {
+        this.updateFormValues(this.editedItem);
+      });
     },
     deleteItem(item) {
-      console.log("deleteItem: ", item);
+      let self = this;
       this.editedItem = Object.assign({}, item);
+      this.$confirm({
+        title: this.$t("_.dialog.delete.title"),
+        content: this.$t("_.dialog.delete.content"),
+        okType: "danger",
+        okText: this.$t("_.dialog.delete.ok"),
+        cancelText: this.$t("_.dialog.delete.cancel"),
+        async onOk() {
+          await API.users.deleteUser(self.editedItem.id);
+          await self.getDataFromApi();
+        }
+      });
+    },
+    closeModal() {
+      this.modalVisible = false;
+      this.$nextTick(() => {
+        this.editedItem = Object.assign({}, config.defaultItem);
+      });
     },
     async save() {
       const valid = await this.$refs.observer.validate();
       if (!valid) {
         return;
       }
-
-      this.modalVisible = false;
+      if (this.editedItem.id) {
+        await API.users.updateUser(this.editedItem.id, this.editedItem);
+      } else {
+        await API.users.createUser(Object.assign(this.editedItem, { password: "123456" }));
+      }
+      await this.getDataFromApi();
+      this.closeModal();
     }
   }
 };
