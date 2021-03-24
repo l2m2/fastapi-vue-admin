@@ -32,6 +32,7 @@
         <template slot="action" slot-scope="text, record">
           <a-space>
             <a @click="editItem(record)">{{ $t("_.action.edit") }}</a>
+            <a @click="setAuthority(record)">{{ $t("role.set-permissions") }}</a>
             <a @click="deleteItem(record)">{{ $t("_.action.delete") }}</a>
           </a-space>
         </template>
@@ -43,6 +44,15 @@
           </a-form>
         </validation-observer>
       </a-modal>
+      <a-drawer :visible="drawerVisible" width="400" :closable="false" @close="closeDrawer">
+        <template slot="title">
+          <div class="drawer-header">
+            <span>{{ $t("role.set-permissions") }}</span>
+            <a-button type="primary" @click="saveAuthority">{{ $t("_.action.save") }}</a-button>
+          </div>
+        </template>
+        <a-tree checkable :tree-data="permissionTreeData" :defaultExpandAll="true"> </a-tree>
+      </a-drawer>
     </a-card>
   </div>
 </template>
@@ -79,8 +89,61 @@ export default {
       modalVisible: false,
       editedItem: {},
       config,
-      uiloader
+      uiloader,
+      drawerVisible: false,
+      permissionTreeData: []
     };
+  },
+  async created() {
+    await this.loadPermissions();
+  },
+  methods: {
+    setAuthority(item) {
+      this.editedItem = Object.assign({}, item);
+      this.drawerVisible = true;
+    },
+    closeDrawer() {
+      this.drawerVisible = false;
+    },
+    async loadPermissions() {
+      const data = await API.permissions.readPermissions();
+      const self = this;
+      const build = function(obj, flat, prefix) {
+        for (let k in obj) {
+          let _prefix = prefix.concat(k);
+          flat.push({ key: _prefix.join("/") });
+          if (Object.keys(obj[k]).length > 0) {
+            flat[flat.length - 1]["title"] = self.$t(["permissions"].concat(..._prefix, "default").join("."));
+            flat[flat.length - 1]["children"] = [];
+            build(obj[k], flat[flat.length - 1]["children"], _prefix);
+          } else {
+            flat[flat.length - 1]["title"] = self.$t("permissions.action." + k);
+          }
+        }
+      };
+      const codes = data.items.reduce((prev, curr) => {
+        const parts = curr.code.split("/");
+        let dirty = prev;
+        for (let i = 0; i < parts.length; i++) {
+          if (!(parts[i] in dirty)) {
+            dirty[parts[i]] = {};
+          }
+          dirty = dirty[parts[i]];
+        }
+        return prev;
+      }, {});
+      let flat = [];
+      build(codes, flat, []);
+      this.permissionTreeData = flat;
+    },
+    saveAuthority() {}
   }
 };
 </script>
+<style lang="less" scoped>
+.drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+</style>

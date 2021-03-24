@@ -8,7 +8,8 @@ export default {
     delete: { en: "Delete", zhcn: "删除" },
     edit: { en: "Edit", zhcn: "编辑" },
     reload: { en: "Reload", zhcn: "刷新" },
-    "columns-setting": { en: "Columns setting", zhcn: "列设置" }
+    "columns-setting": { en: "Columns setting", zhcn: "列设置" },
+    save: { en: "Save", zhcn: "保存" }
   },
   "data-footer": {
     "page-text": { en: "{0}-{1} of {2}", zhcn: "{0}-{1} 共 {2}" }
