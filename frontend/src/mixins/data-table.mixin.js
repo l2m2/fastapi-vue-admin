@@ -9,7 +9,7 @@ export default {
         showSizeChanger: true
       },
       filters: null,
-      sorter: null,
+      sorter: {},
       items: []
     };
   },
@@ -28,8 +28,8 @@ export default {
         skip: (this.pagination.current - 1) * this.pagination.pageSize,
         limit: this.pagination.pageSize
       };
-      if (this.sorter) {
-        params.order = `${this.sorter.field} ${this.sorter.order === "ascend" ? "ASC" : "DESC"}`;
+      if (this.sorter && this.sorter.field) {
+        params.order = `${this.sorter.field} ${this.sorter.order === "descend" ? "DESC" : "ASC"}`;
       }
       try {
         const data = await this.listApi(params);
