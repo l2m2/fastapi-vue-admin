@@ -6,7 +6,9 @@ from app import models, schemas, crud
 
 class CRUDRole(crud.CRUDBase[models.Role, schemas.RoleCreate, schemas.RoleUpdate, schemas.RoleList]):
   def get_permissions_by_role_id(self, db: Session, *, id: int) -> List[str]:
-    return db.query(models.RolePermissionRel.permission_code).filter(models.RolePermissionRel.role_id == id).all()
+    codes = db.query(models.RolePermissionRel.permission_code).filter(models.RolePermissionRel.role_id == id).all()
+    codes = [x[0] for x in codes]
+    return codes
 
   def update_permissions_by_role_id(self, db: Session, *, id: int, permissions: List[str]):
     delete_q = models.RolePermissionRel.__table__.delete().where(models.RolePermissionRel.role_id == id)

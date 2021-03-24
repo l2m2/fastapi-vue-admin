@@ -100,8 +100,9 @@ export default {
     await this.loadPermissions();
   },
   methods: {
-    setAuthority(item) {
+    async setAuthority(item) {
       this.editedItem = Object.assign({}, item);
+      this.selectedPermissions = await API.roles.readRolePermissionsById(item.id);
       this.drawerVisible = true;
     },
     closeDrawer() {
