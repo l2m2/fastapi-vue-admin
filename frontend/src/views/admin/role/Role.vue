@@ -116,7 +116,7 @@ export default {
           let _prefix = prefix.concat(k);
           if (Object.keys(obj[k]).length > 0) {
             flat.push({
-              key: _prefix.join("/") + "_$dirty$", // 加上_$dirty$是为了在获取选中的权限数据时过滤掉叶子结点
+              key: _prefix.join("/") + "_$leaf$", // 加上_$leaf$是为了在获取选中的权限数据时过滤掉叶子结点
               title: self.$t(["permissions"].concat(..._prefix, "default").join(".")),
               children: []
             });
@@ -145,7 +145,7 @@ export default {
       this.permissionTreeData = flat;
     },
     async saveAuthority() {
-      const data = this.selectedPermissions.filter(item => !/_\$dirty\$$/.test(item));
+      const data = this.selectedPermissions.filter(item => !/_\$leaf\$$/.test(item));
       await API.roles.updateRolePermissionsById(this.editedItem.id, data);
       this.drawerVisible = false;
     }
