@@ -28,6 +28,11 @@ const columns = function(self) {
       sorter: true
     },
     {
+      title: self.$t("user.roles"),
+      dataIndex: "roles",
+      scopedSlots: { customRender: "roles" }
+    },
+    {
       title: self.$t("_.action.default"),
       dataIndex: "action",
       scopedSlots: { customRender: "action" }

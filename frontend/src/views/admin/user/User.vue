@@ -37,6 +37,11 @@
         <template slot="is_superuser" slot-scope="is_superuser">
           <span> {{ is_superuser ? $t("user.enum.is_superuser.yes") : $t("user.enum.is_superuser.no") }} </span>
         </template>
+        <template slot="roles" slot-scope="roles">
+          <a-tag v-for="role in roles" :key="role">
+            {{ rolesMap[role] }}
+          </a-tag>
+        </template>
         <template slot="action" slot-scope="text, record">
           <a-space>
             <a @click="editItem(record)">{{ $t("_.action.edit") }}</a>
@@ -85,10 +90,30 @@ export default {
         props: { allowClear: true }
       },
       config,
-      uiloader
+      uiloader,
+      roles: [],
+      rolesMap: {}
     };
   },
+  computed: {
+    roleOptions() {
+      return this.roles.map(item => ({ text: item.name, value: item.id }));
+    }
+  },
+  created() {
+    this.loadRoles();
+  },
   methods: {
+    async loadRoles() {
+      const data = await API.roles.readRoles({ skip: 0, limit: 99999, order: "name ASC" });
+      this.roles = data.items;
+      this.rolesMap = this.roles.reduce((prev, curr) => {
+        if (!(curr.id in prev)) {
+          prev[curr.id] = curr.name;
+        }
+        return prev;
+      }, {});
+    },
     async save() {
       const valid = await this.$refs.observer.validate();
       if (!valid) {

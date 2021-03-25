@@ -43,6 +43,18 @@ export default function(self) {
             "checked-children": self.$t("user.enum.is_superuser.yes"),
             "un-checked-children": self.$t("user.enum.is_superuser.no")
           }
+        },
+        {
+          name: "roles",
+          component: "ant-form-adaptor",
+          label: self.$t("user.roles"),
+          extend: {
+            component: "a-select"
+          },
+          props: {
+            mode: "multiple"
+          },
+          items: self.roleOptions
         }
       ]
     }

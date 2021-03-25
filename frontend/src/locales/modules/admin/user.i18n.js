@@ -4,6 +4,7 @@ export default {
   email: { en: "Email", zhcn: "邮箱" },
   superuser: { en: "Superuser", zhcn: "超级用户" },
   status: { en: "Status", zhcn: "状态" },
+  roles: { en: "Roles", zhcn: "角色" },
   enum: {
     status: {
       active: { en: "Active", zhcn: "激活" },
