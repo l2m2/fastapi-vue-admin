@@ -1,4 +1,10 @@
 export default {
+  data() {
+    return {
+      modalVisible: false,
+      editedItem: {}
+    };
+  },
   computed: {
     columns() {
       return this.config.columns(this);

@@ -84,8 +84,6 @@ export default {
         size: "default",
         props: { allowClear: true }
       },
-      modalVisible: false,
-      editedItem: {},
       config,
       uiloader
     };
