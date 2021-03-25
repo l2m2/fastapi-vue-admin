@@ -40,7 +40,7 @@ def create_user(
   if user:
     raise HTTPException(
       status_code=400,
-      detail="The user with this username already exists in the system.",
+      detail="系统中已存在相同的用户名.",
     )
   user = crud.user.create(db, obj_in=user_in)
   return user

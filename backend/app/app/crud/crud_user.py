@@ -30,6 +30,9 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate, UserList]):
       is_superuser=obj_in.is_superuser,
     )
     db.add(db_obj)
+    db.flush()
+    if obj_in.roles:
+      db.add_all([UserRoleRel(user_id=db_obj.id, role_id=x) for x in obj_in.roles])
     db.commit()
     db.refresh(db_obj)
     return db_obj
@@ -43,6 +46,10 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate, UserList]):
       hashed_password = get_password_hash(update_data["password"])
       del update_data["password"]
       update_data["password"] = hashed_password
+    if "roles" in update_data:
+      delete_q = UserRoleRel.__table__.delete().where(UserRoleRel.user_id == db_obj.id)
+      db.execute(delete_q)
+      db.add_all([UserRoleRel(role_id=x, user_id=db_obj.id) for x in update_data["roles"]])
     return super().update(db, db_obj=db_obj, obj_in=update_data)
 
   def authenticate(self, db: Session, *, username: str, password: str) -> Optional[User]:
