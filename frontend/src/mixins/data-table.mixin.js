@@ -35,7 +35,11 @@ export default {
       try {
         const data = await this.listApi(params);
         this.pagination.total = data.total;
-        this.items = data.items;
+        if (typeof this.getDataFromApiHook === "function") {
+          this.items = this.getDataFromApiHook(data.items);
+        } else {
+          this.items = data.items;
+        }
         this.loading = false;
       } catch (e) {
         this.loading = false;
