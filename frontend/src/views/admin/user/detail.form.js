@@ -52,7 +52,8 @@ export default function(self) {
             component: "a-select"
           },
           props: {
-            mode: "multiple"
+            mode: "multiple",
+            "option-filter-prop": "children"
           },
           items: self.roleOptions
         }
