@@ -22,7 +22,7 @@ def read_users(
   """
   获取用户列表
   """
-  users = crud.user.get_multi(db, skip=skip, limit=limit, filter=filter, order=order)
+  users = crud.user.get_users(db, skip=skip, limit=limit, filter=filter, order=order)
   return users
 
 

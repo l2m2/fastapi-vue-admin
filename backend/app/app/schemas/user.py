@@ -10,6 +10,7 @@ class UserBase(BaseModel):
   email: Optional[EmailStr] = None
   is_active: Optional[bool] = True
   is_superuser: bool = False
+  roles: Optional[List[int]] = None
 
 
 # Properties to receive via API on creation
