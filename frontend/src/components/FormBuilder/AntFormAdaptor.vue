@@ -151,7 +151,6 @@ export default {
 
   methods: {
     updateAntLocalValue(source) {
-      console.log(this.isMultipleSelect, source);
       if (source.target) {
         this.updateLocalValue(source.target.value);
       } else {

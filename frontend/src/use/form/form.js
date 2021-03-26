@@ -13,7 +13,6 @@ function useForm() {
   };
 
   const updateFormValues = function(formValues) {
-    console.log("updateFormValues: ", formValues);
     state.formValues = formValues;
   };
 

@@ -19,6 +19,22 @@ const routes = [
         component: () => import("@/views/login/Login")
       }
     ]
+  },
+  {
+    path: "/admin",
+    component: () => import("@/layouts/BasicLayout"),
+    children: [
+      {
+        path: "user",
+        name: "user",
+        component: () => import("@/views/admin/user/User")
+      },
+      {
+        path: "role",
+        name: "role",
+        component: () => import("@/views/admin/role/Role")
+      }
+    ]
   }
 ];
 
