@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { useFormElement } from "@fext/vue-use";
+import { useFormElement } from "@/use/form/element";
 
 export default {
   name: "ant-form-adaptor",
@@ -124,7 +124,7 @@ export default {
     },
 
     isMultipleSelect() {
-      return this.isSelect && this.props.multiple;
+      return this.isSelect && this.props.mode === "multiple";
     },
 
     isRadio() {
@@ -142,8 +142,7 @@ export default {
 
   created() {
     const { localValue, isMultipleSelect, isCheckbox } = this;
-
-    if (localValue == null) {
+    if (localValue === null || localValue === undefined) {
       if (isMultipleSelect || isCheckbox) {
         this.setInitialValue([]);
       }
@@ -152,6 +151,7 @@ export default {
 
   methods: {
     updateAntLocalValue(source) {
+      console.log(this.isMultipleSelect, source);
       if (source.target) {
         this.updateLocalValue(source.target.value);
       } else {

@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import { useForm } from "@fext/vue-use";
+import { useForm } from "@/use/form/form";
 import dataTableMixin from "@/mixins/data-table.mixin";
 import normalCRUDMixin from "@/mixins/normal-crud.mixin";
 import API from "@/api";
