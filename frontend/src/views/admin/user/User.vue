@@ -114,15 +114,6 @@ export default {
         return prev;
       }, {});
     },
-    getDataFromApiHook(items) {
-      // 解决当传入a-select等值为null时，会默认出现一个空白的选中项的问题
-      return items.map(item => {
-        if (!item.roles) {
-          item.roles = [];
-        }
-        return item;
-      });
-    },
     async save() {
       const valid = await this.$refs.observer.validate();
       if (!valid) {

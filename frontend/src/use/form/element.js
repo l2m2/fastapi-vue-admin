@@ -10,7 +10,6 @@ function useFormElement(props, context) {
   const setInitialValue = function(value) {
     initialValue.value = _cloneDeep(value);
     localValue.value = _cloneDeep(value);
-    console.log("setInitialValue:", value, localValue.value);
     context.emit("input", localValue.value);
   };
 
@@ -20,7 +19,6 @@ function useFormElement(props, context) {
   };
 
   const updateLocalValue = function(value) {
-    console.log("updateLocalValue:", value, localValue.value);
     if (!_isEqual(value, localValue.value)) {
       dirty.value = true;
       localValue.value = _cloneDeep(value);

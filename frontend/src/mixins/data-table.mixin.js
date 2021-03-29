@@ -38,7 +38,10 @@ export default {
         if (typeof this.getDataFromApiHook === "function") {
           this.items = this.getDataFromApiHook(data.items);
         } else {
-          this.items = data.items;
+          this.items = data.items.map(item => {
+            Object.keys(item).forEach(k => item[k] == null && delete item[k]);
+            return item;
+          });
         }
         this.loading = false;
       } catch (e) {

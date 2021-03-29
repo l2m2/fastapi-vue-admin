@@ -58,9 +58,7 @@ const options = {
 
   setup(props) {
     const { formValues, updateFormValues } = props.form;
-
     return {
-      // from form composition
       formValues,
       updateFormValues
     };
@@ -100,7 +98,6 @@ const options = {
           return deepmerge.all([{}, shares, comp]);
         });
       });
-
       this.updateFormValues(initialValues);
     },
 

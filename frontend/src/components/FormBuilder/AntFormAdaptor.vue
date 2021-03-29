@@ -142,7 +142,7 @@ export default {
 
   created() {
     const { localValue, isMultipleSelect, isCheckbox } = this;
-    if (localValue === null || localValue === undefined) {
+    if (localValue === null) {
       if (isMultipleSelect || isCheckbox) {
         this.setInitialValue([]);
       }
