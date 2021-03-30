@@ -33,6 +33,10 @@ class User(UserBase):
     orm_mode = True
 
 
+class UserMe(User):
+  permissions: Optional[List[str]] = None
+
+
 class UserList(BaseModel):
   total: int
   items: List[User]

@@ -70,7 +70,7 @@ def update_user_me(
   return user
 
 
-@router.get("/me", response_model=schemas.User)
+@router.get("/me", response_model=schemas.UserMe)
 def read_user_me(
     db: Session = Depends(deps.get_db),
     current_user: models.User = Depends(deps.get_current_active_user),
@@ -78,7 +78,10 @@ def read_user_me(
   """
   获取当前用户信息
   """
-  return current_user
+  permissions = crud.user.get_permissions_by_userid(db, user_id=current_user.id)
+  ret = jsonable_encoder(current_user)
+  ret["permissions"] = permissions
+  return ret
 
 
 @router.get("/{user_id}", response_model=schemas.User)

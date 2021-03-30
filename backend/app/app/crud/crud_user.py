@@ -1,4 +1,4 @@
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, Optional, Union, List
 
 from sqlalchemy.orm import Session
 from sqlalchemy import text, func, true
@@ -7,6 +7,7 @@ from app.core.security import get_password_hash, verify_password
 from app.crud.base import CRUDBase
 from app.models.user import User
 from app.models.user_role_rel import UserRoleRel
+from app.models.role_permission_rel import RolePermissionRel
 from app.schemas.user import UserCreate, UserUpdate, UserList
 
 
@@ -65,6 +66,14 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate, UserList]):
 
   def is_superuser(self, user: User) -> bool:
     return user.is_superuser
+
+  def get_permissions_by_userid(self, db: Session, *, user_id: int) -> Optional[List[str]]:
+    permission_codes = db.query(RolePermissionRel.permission_code).select_from(User).join(UserRoleRel, UserRoleRel.user_id == User.id).join(
+      RolePermissionRel,
+      RolePermissionRel.role_id == UserRoleRel.role_id,
+    ).filter(User.id == user_id).all()
+    permission_codes = [x[0] for x in permission_codes]
+    return permission_codes
 
 
 user = CRUDUser(User)
