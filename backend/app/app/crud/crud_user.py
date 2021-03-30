@@ -68,10 +68,9 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate, UserList]):
     return user.is_superuser
 
   def get_permissions_by_userid(self, db: Session, *, user_id: int) -> Optional[List[str]]:
-    permission_codes = db.query(RolePermissionRel.permission_code).select_from(User).join(UserRoleRel, UserRoleRel.user_id == User.id).join(
-      RolePermissionRel,
-      RolePermissionRel.role_id == UserRoleRel.role_id,
-    ).filter(User.id == user_id).all()
+    subq = db.query(User).filter(User.id == user_id).subquery()
+    permission_codes = db.query(RolePermissionRel.permission_code).select_from(subq).join(
+      UserRoleRel, UserRoleRel.user_id == subq.c.id).join(RolePermissionRel, RolePermissionRel.role_id == UserRoleRel.role_id).all()
     permission_codes = [x[0] for x in permission_codes]
     return permission_codes
 
