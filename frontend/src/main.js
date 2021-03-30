@@ -13,7 +13,7 @@ import i18n from "./plugins/i18n";
 import themePluginConfig from "../config/theme-plugin.config";
 import "./utils/string";
 
-// import "./router/router-hook";
+import "./router/router-hook";
 import "./global.less";
 
 Vue.config.productionTip = false;

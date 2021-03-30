@@ -21,6 +21,8 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+import { SIDEBAR_TYPE, TOGGLE_MOBILE_TYPE } from "@/store/mutation-types";
 import { SettingDrawer } from "@ant-design-vue/pro-layout";
 import defaultSettings from "@/config/default-settings";
 import LogoSvg from "../assets/logo.svg?inline";
@@ -49,6 +51,21 @@ export default {
       query: {},
       isMobile: false
     };
+  },
+  computed: {
+    ...mapState({
+      mainMenu: state => state.permission.additionalRouters
+    })
+  },
+  created() {
+    const routes = this.mainMenu.find(item => item.path === "/");
+    this.menus = (routes && routes.children) || [];
+    this.$watch("collapsed", () => {
+      this.$store.commit(SIDEBAR_TYPE, this.collapsed);
+    });
+    this.$watch("isMobile", () => {
+      this.$store.commit(TOGGLE_MOBILE_TYPE, this.isMobile);
+    });
   },
   methods: {
     i18nRender(val) {
@@ -88,5 +105,3 @@ export default {
   }
 };
 </script>
-
-<style></style>

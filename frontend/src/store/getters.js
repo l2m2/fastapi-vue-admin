@@ -6,7 +6,10 @@ const getters = {
   multiTab: state => state.app.multiTab,
   token: state => state.user.token,
   avatar: state => state.user.avatar,
-  fullname: state => state.user.fullname
+  username: state => state.user.username,
+  fullname: state => state.user.fullname,
+  permissions: state => state.user.permissions,
+  additionalRouters: state => state.permission.additionalRouters
 };
 
 export default getters;

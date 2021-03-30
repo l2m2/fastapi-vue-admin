@@ -18,6 +18,9 @@ const mutations = {
   SET_FULLNAME: (state, fullname) => {
     state.fullname = fullname;
   },
+  SET_PERMISSIONS: (state, permissions) => {
+    state.permissions = permissions;
+  },
   SET_INFO: (state, info) => {
     state.info = info;
   }
@@ -44,12 +47,19 @@ const actions = {
         .then(response => {
           commit("SET_FULLNAME", response.fullname);
           commit("SET_USERNAME", response.username);
+          commit("SET_PERMISSIONS", response.permissions);
           commit("SET_INFO", response);
+          resolve(response);
         })
         .catch(error => {
           reject(error);
         });
     });
+  },
+  logout({ commit }) {
+    commit("SET_PERMISSIONS", []);
+    commit("SET_INFO", {});
+    commit("SET_TOKEN", null);
   }
 };
 

@@ -1,7 +1,6 @@
 import router from "@/router";
 import store from "@/store";
 import NProgress from "nprogress";
-import notification from "ant-design-vue/es/notification";
 
 NProgress.configure({ showSpinner: false });
 
@@ -16,21 +15,28 @@ router.beforeEach((to, from, next) => {
       next({ path: defaultRoutePath });
       NProgress.done();
     } else {
-      if (store.getters.permissions.length === 0 && store.getters.username !== "admin") {
+      if (store.getters.additionalRouters.length === 0) {
         store
-          .dispatch("getUserInfo")
-          .then(() => {
-            // TODO
+          .dispatch("user/getUserInfo")
+          .then(res => {
+            const permissions = res.permissions;
+            store.dispatch("permission/generateRouters", { permissions }).then(() => {
+              store.getters.additionalRouters.forEach(item => {
+                router.addRoute(item);
+              });
+              const redirect = decodeURIComponent(from.query.redirect || to.path);
+              if (to.path === redirect) {
+                next({ ...to, replace: true });
+              } else {
+                next({ path: redirect });
+              }
+            });
           })
           .catch(() => {
-            notification.error({
-              message: "错误",
-              description: "请求用户信息失败，请重试"
+            store.dispatch("user/logout").then(() => {
+              next({ path: loginRoutePath, query: { redirect: to.fullPath } });
             });
           });
-        store.dispatch("logout").then(() => {
-          next({ path: loginRoutePath, query: { redirect: to.fullPath } });
-        });
       } else {
         next();
       }
