@@ -1,8 +1,6 @@
 <template>
   <a-dropdown :trigger="['click']">
-    <span>
-      <icon-font type="icon-i18n" />
-    </span>
+    <span><icon-font type="icon-i18n"/></span>
     <a-menu slot="overlay" v-model="current">
       <a-menu-item v-for="lang in langs" :key="lang.name" @click="changeLang(lang.name)"> {{ lang.title }}</a-menu-item>
     </a-menu>
