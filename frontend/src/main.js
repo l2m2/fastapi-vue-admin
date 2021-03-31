@@ -9,6 +9,7 @@ import "./plugins/vee-validate";
 import "./plugins/antd";
 import "./plugins/antdpro";
 import "./plugins/fext";
+import "./plugins/iconfont";
 import i18n from "./plugins/i18n";
 import themePluginConfig from "../config/theme-plugin.config";
 import "./utils/string";
