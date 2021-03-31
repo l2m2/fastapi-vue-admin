@@ -42,12 +42,12 @@ export const dynamicRouters = [
         path: "/dashboard",
         name: "dashboard",
         component: () => import("@/views/dash/Dashboard"),
-        meta: { title: "menu.dashboard", permission: ["/apps/dashboard/read"] }
+        meta: { title: "menu.dashboard", icon: "dashboard", permission: ["/apps/dashboard/read"] }
       },
       {
         path: "/admin",
         component: RouteView,
-        meta: { title: "menu.admin.default" },
+        meta: { title: "menu.admin.default", icon: "setting" },
         children: [
           {
             path: "/admin/user",
