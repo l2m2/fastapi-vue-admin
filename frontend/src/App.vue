@@ -1,5 +1,5 @@
 <template>
-  <a-config-provider :locale="locales.zhcn">
+  <a-config-provider :locale="locales[$store.getters.lang]">
     <div id="app">
       <router-view />
     </div>
