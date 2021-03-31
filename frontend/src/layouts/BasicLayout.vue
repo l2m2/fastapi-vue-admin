@@ -16,6 +16,9 @@
       </div>
     </template>
     <setting-drawer v-if="!isProduction" :settings="settings" @change="handleSettingChange"> </setting-drawer>
+    <template v-slot:rightContentRender>
+      <RightContent :top-menu="settings.layout === 'topmenu'" :is-mobile="isMobile" :theme="settings.theme" />
+    </template>
     <router-view />
   </pro-layout>
 </template>
@@ -30,7 +33,8 @@ export default {
   name: "BasicLayout",
   components: {
     SettingDrawer,
-    LogoSvg
+    LogoSvg,
+    RightContent: () => import("@/components/GlobalHeader/RightContent")
   },
   data() {
     return {
@@ -105,3 +109,6 @@ export default {
   }
 };
 </script>
+<style lang="less">
+@import "./BasicLayout.less";
+</style>
