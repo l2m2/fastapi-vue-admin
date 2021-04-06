@@ -40,14 +40,3 @@ export default {
   }
 };
 </script>
-
-<style lang="less" scoped>
-.ant-pro-drop-down {
-  /deep/ .action {
-    margin-right: 8px;
-  }
-  /deep/ .ant-dropdown-menu-item {
-    min-width: 160px;
-  }
-}
-</style>
