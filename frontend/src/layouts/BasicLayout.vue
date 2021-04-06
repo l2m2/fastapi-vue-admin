@@ -34,7 +34,7 @@ export default {
   components: {
     SettingDrawer,
     LogoSvg,
-    RightContent: () => import("@/components/GlobalHeader/RightContent")
+    RightContent: () => import("./components/RightContent")
   },
   data() {
     return {

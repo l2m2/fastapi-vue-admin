@@ -13,7 +13,7 @@
             </a>
           </div>
           <div class="desc">
-            {{ $t("layouts.userLayout.title") }}
+            {{ $t("layouts.user-layout.title") }}
           </div>
         </div>
 
@@ -21,9 +21,9 @@
 
         <div class="footer">
           <div class="links">
-            <a href="_self">{{ $t("layouts.userLayout.help") }}</a>
-            <a href="_self">{{ $t("layouts.userLayout.privacy") }}</a>
-            <a href="_self">{{ $t("layouts.userLayout.terms") }}</a>
+            <a href="_self">{{ $t("layouts.user-layout.help") }}</a>
+            <a href="_self">{{ $t("layouts.user-layout.privacy") }}</a>
+            <a href="_self">{{ $t("layouts.user-layout.terms") }}</a>
           </div>
           <div class="copyright">Copyright &copy; {{ new Date().getFullYear() }} L2M2</div>
         </div>
@@ -38,7 +38,7 @@ import { deviceMixin } from "@/mixins/device.mixin";
 export default {
   name: "UserLayout",
   components: {
-    SelectLang: () => import("@/components/SelectLang/SelectLang")
+    SelectLang: () => import("./components/SelectLang")
   },
   mixins: [deviceMixin],
   mounted() {

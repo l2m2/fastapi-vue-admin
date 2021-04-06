@@ -1,5 +1,6 @@
 <template>
   <div :class="wrpCls">
+    <AvatarDropdown class="ant-pro-global-header-index-action" />
     <SelectLang class="ant-pro-global-header-index-action" />
   </div>
 </template>
@@ -8,7 +9,8 @@
 export default {
   name: "RightContent",
   components: {
-    SelectLang: () => import("@/components/SelectLang/SelectLang")
+    SelectLang: () => import("./SelectLang"),
+    AvatarDropdown: () => import("./AvatarDropdown")
   },
   props: {
     isMobile: {
@@ -23,6 +25,11 @@ export default {
       type: String,
       required: true
     }
+  },
+  data() {
+    return {
+      currentUser: {}
+    };
   },
   computed: {
     wrpCls() {
