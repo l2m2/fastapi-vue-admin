@@ -14,6 +14,7 @@ import {
   Carousel,
   Cascader,
   Checkbox,
+  Col,
   Collapse,
   Comment,
   ConfigProvider,
@@ -42,6 +43,7 @@ import {
   Radio,
   Rate,
   Result,
+  Row,
   Select,
   Slider,
   Space,
@@ -73,6 +75,7 @@ Vue.use(Card);
 Vue.use(Carousel);
 Vue.use(Cascader);
 Vue.use(Checkbox);
+Vue.use(Col);
 Vue.use(Collapse);
 Vue.use(Comment);
 Vue.use(ConfigProvider);
@@ -101,6 +104,7 @@ Vue.use(Progress);
 Vue.use(Radio);
 Vue.use(Rate);
 Vue.use(Result);
+Vue.use(Row);
 Vue.use(Select);
 Vue.use(Slider);
 Vue.use(Space);

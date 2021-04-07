@@ -33,14 +33,14 @@
 </template>
 
 <script>
-import { deviceMixin } from "@/mixins/device.mixin";
+import { baseMixin } from "@/mixins/app.mixin";
 
 export default {
   name: "UserLayout",
   components: {
     SelectLang: () => import("./components/SelectLang")
   },
-  mixins: [deviceMixin],
+  mixins: [baseMixin],
   mounted() {
     document.body.classList.add("userLayout");
   },

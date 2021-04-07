@@ -79,7 +79,22 @@ export const dynamicRouters = [
       {
         path: "/account/settings",
         name: "account-settings",
-        component: () => import("@/views/account/settings/AccountSettings")
+        component: () => import("@/views/account/settings/AccountSettings"),
+        redirect: "/account/settings/basic",
+        children: [
+          {
+            path: "/account/settings/basic",
+            name: "account-basic-settings",
+            component: () => import("@/views/account/settings/Basic"),
+            meta: { title: "account.settings.basic.default" }
+          },
+          {
+            path: "/account/settings/security",
+            name: "account-security-settings",
+            component: () => import("@/views/account/settings/Security"),
+            meta: { title: "account.settings.security.default" }
+          }
+        ]
       }
     ]
   },
