@@ -72,6 +72,18 @@ export const dynamicRouters = [
     ]
   },
   {
+    path: "/account",
+    name: "account",
+    component: BasicLayout,
+    children: [
+      {
+        path: "/account/settings",
+        name: "account-settings",
+        component: () => import("@/views/account/settings/AccountSettings")
+      }
+    ]
+  },
+  {
     path: "*",
     redirect: "/404"
   }
