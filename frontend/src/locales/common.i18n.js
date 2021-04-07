@@ -25,6 +25,11 @@ export default {
       cancel: { en: "Cancel", zhcn: "取消" }
     }
   },
+  message: {
+    save: {
+      success: { en: "Data saved", zhcn: "数据已保存" }
+    }
+  },
   validations: {
     alpha: { en: "The field may only contain alphabetic characters", zhcn: "该字段只能包含字母字符" },
     alpha_num: { en: "The field may only contain alpha-numeric characters", zhcn: "该字段能够包含字母数字字符、破折号和下划线" },

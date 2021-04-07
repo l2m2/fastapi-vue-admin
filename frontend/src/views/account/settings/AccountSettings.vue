@@ -14,10 +14,12 @@
             </a-menu>
           </a-col>
           <a-col flex="auto">
-            <a-page-header :title="$t($route.meta.title)"> </a-page-header>
-            <a-row>
+            <div style="padding:20px 40px">
+              <div class="account-settings-info-title">
+                <span>{{ $t($route.meta.title) }}</span>
+              </div>
               <route-view></route-view>
-            </a-row>
+            </div>
           </a-col>
         </a-row>
       </div>
@@ -52,3 +54,12 @@ export default {
   }
 };
 </script>
+<style lang="less" scoped>
+.account-settings-info-title {
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 28px;
+  margin-bottom: 12px;
+}
+</style>
