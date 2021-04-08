@@ -9,9 +9,7 @@ from app import crud, models, schemas
 from app.api import deps
 from app.core import security
 from app.core.config import settings
-from app.core.security import get_password_hash
-
-from app.utils import verify_password_reset_token
+from app.core.security import get_password_hash, verify_password
 
 router = APIRouter()
 
@@ -36,33 +34,23 @@ def login_access_token(db: Session = Depends(deps.get_db), form_data: OAuth2Pass
 @router.post("/login/test-token", response_model=schemas.User)
 def test_token(current_user: models.User = Depends(deps.get_current_user)) -> Any:
   """
-  Test access token
+  测试Token
   """
   return current_user
 
 
 @router.post("/reset-password/", response_model=schemas.Msg)
-def reset_password(
-    token: str = Body(...),
-    new_password: str = Body(...),
-    db: Session = Depends(deps.get_db),
-) -> Any:
+def reset_password(current_password: str = Body(...),
+                   new_password: str = Body(...),
+                   db: Session = Depends(deps.get_db),
+                   current_user: models.User = Depends(deps.get_current_active_user)) -> Any:
   """
-  Reset password
+  重置密码
   """
-  id = verify_password_reset_token(token)
-  if not id:
-    raise HTTPException(status_code=400, detail="Invalid token")
-  user = crud.user.get(db, id=id)
-  if not user:
-    raise HTTPException(
-      status_code=404,
-      detail="The user with this username does not exist in the system.",
-    )
-  elif not crud.user.is_active(user):
-    raise HTTPException(status_code=400, detail="Inactive user")
+  if not verify_password(current_password, current_user.password):
+    raise HTTPException(status_code=400, detail="输入的原始密码错误")
   hashed_password = get_password_hash(new_password)
-  user.password = hashed_password
-  db.add(user)
+  current_user.password = hashed_password
+  db.add(current_user)
   db.commit()
-  return {"msg": "Password updated successfully"}
+  return {"msg": "密码修改成功"}
