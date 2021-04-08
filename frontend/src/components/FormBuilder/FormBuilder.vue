@@ -70,6 +70,12 @@ const options = {
 
   computed: {},
 
+  watch: {
+    config() {
+      this.prepare();
+    }
+  },
+
   created() {
     this.prepare();
   },
@@ -88,13 +94,13 @@ const options = {
           if (!comp.name) {
             throw new Error(`FormBuilder: name is required, config - ${JSON.stringify(comp)}`);
           }
-
-          if (comp.defaultValue != null) {
-            if (formValues[comp.name] == null) {
+          if (formValues[comp.name] != null) {
+            initialValues[comp.name] = formValues[comp.name];
+          } else {
+            if (comp.defaultValue != null) {
               initialValues[comp.name] = comp.defaultValue;
             }
           }
-
           return deepmerge.all([{}, shares, comp]);
         });
       });
