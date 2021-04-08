@@ -16,11 +16,10 @@ import API from "@/api";
 export default {
   setup() {
     const form = useForm();
-    const { formValues, setInitialFormValues, updateFormValues } = form;
+    const { formValues, updateFormValues } = form;
     return {
       form,
       formValues,
-      setInitialFormValues,
       updateFormValues
     };
   },

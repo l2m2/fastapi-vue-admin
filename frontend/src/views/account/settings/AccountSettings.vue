@@ -4,7 +4,7 @@
       <div :class="{ mobile: isMobile }">
         <a-row type="flex">
           <a-col flex="200px">
-            <a-menu :mode="isMobile ? 'horizontal' : 'inline'" :selectedKeys="selectedKeys" type="inner">
+            <a-menu :mode="isMobile ? 'horizontal' : 'inline'" :selectedKeys="selectedKeys" type="inner" style="height:100%">
               <a-menu-item key="/account/settings/basic">
                 <router-link :to="{ name: 'account-basic-settings' }"> {{ $t("account.settings.basic.default") }}</router-link>
               </a-menu-item>
