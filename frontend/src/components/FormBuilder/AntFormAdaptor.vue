@@ -1,5 +1,5 @@
 <template>
-  <validation-provider :rules="rules" v-slot="{ errors }">
+  <validation-provider :rules="rules" v-slot="{ errors }" :vid="name" :name="label">
     <a-form-item :size="size" :required="isRequired" :validateStatus="errors.length ? 'error' : null" :help="errors[0]" :extra="tip">
       <template v-slot:label>
         <span>{{ label }}</span>
