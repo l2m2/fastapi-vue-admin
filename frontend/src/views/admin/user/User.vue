@@ -51,7 +51,7 @@
       </a-table>
       <a-modal v-model="modalVisible" :title="editedItem.id ? $t('_.action.edit') : $t('_.action.new')" @ok="save">
         <validation-observer ref="observer">
-          <a-form :colon="false" :label-col="{ span: 4 }" :wrapper-col="{ span: 16 }">
+          <a-form :colon="false" :label-col="{ span: 4 }" :wrapper-col="{ span: 18 }">
             <form-builder :form="form" :shares="formShares" :config="formConfig"></form-builder>
           </a-form>
         </validation-observer>
