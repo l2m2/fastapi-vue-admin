@@ -2,7 +2,7 @@
   <div>
     <a-card :title="$t('user.list-card-title')" :bordered="false" :bodyStyle="{ padding: 0 }">
       <div slot="extra">
-        <a-button type="primary" @click="editItem()">{{ $t("_.action.new") }}</a-button>
+        <a-button type="primary" @click="editItem()" v-auth="'admin.user.create'">{{ $t("_.action.new") }}</a-button>
         <a-divider type="vertical"></a-divider>
         <a-space>
           <a-tooltip>
@@ -44,8 +44,8 @@
         </template>
         <template slot="action" slot-scope="text, record">
           <a-space>
-            <a @click="editItem(record)">{{ $t("_.action.edit") }}</a>
-            <a @click="deleteItem(record)">{{ $t("_.action.delete") }}</a>
+            <a v-auth="'admin.user.update'" @click="editItem(record)">{{ $t("_.action.edit") }}</a>
+            <a v-auth="'admin.user.delete'" @click="deleteItem(record)">{{ $t("_.action.delete") }}</a>
           </a-space>
         </template>
       </a-table>
