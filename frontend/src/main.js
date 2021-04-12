@@ -11,6 +11,9 @@ import "./plugins/antdpro";
 import "./plugins/fext";
 import "./plugins/iconfont";
 import i18n from "./plugins/i18n";
+import authPlugin from "./plugins/auth";
+Vue.use(authPlugin, { store });
+
 import themePluginConfig from "../config/theme-plugin.config";
 import "./utils/string";
 
