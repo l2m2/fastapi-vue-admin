@@ -32,7 +32,7 @@ def _get_all_permissions_code():
                 items.append("update")
               elif crud_item == "D":
                 items.append("delete")
-      total = total + [f"{prefix}/{x}" for x in items]
+      total = total + ['.'.join(f"{prefix}/{x}".split('/')) for x in items]
   return total
 
 

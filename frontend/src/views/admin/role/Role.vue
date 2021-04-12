@@ -114,21 +114,21 @@ export default {
           let _prefix = prefix.concat(k);
           if (Object.keys(obj[k]).length > 0) {
             flat.push({
-              key: _prefix.join("/") + "_$leaf$", // 加上_$leaf$是为了在获取选中的权限数据时过滤掉叶子结点
+              key: _prefix.join(".") + "_$leaf$", // 加上_$leaf$是为了在获取选中的权限数据时过滤掉叶子结点
               title: self.$t(["permissions"].concat(..._prefix, "default").join(".")),
               children: []
             });
             build(obj[k], flat[flat.length - 1]["children"], _prefix);
           } else {
             flat.push({
-              key: _prefix.join("/"),
+              key: _prefix.join("."),
               title: self.$t("permissions.action." + k)
             });
           }
         }
       };
       const codes = data.items.reduce((prev, curr) => {
-        const parts = curr.code.split("/");
+        const parts = curr.code.split(".");
         let dirty = prev;
         for (let i = 0; i < parts.length; i++) {
           if (!(parts[i] in dirty)) {
