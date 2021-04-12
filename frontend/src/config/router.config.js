@@ -42,7 +42,7 @@ export const dynamicRouters = [
         path: "/dashboard",
         name: "dashboard",
         component: () => import("@/views/dash/Dashboard"),
-        meta: { title: "menu.dashboard", icon: "dashboard", permission: ["/apps/dashboard/read"] }
+        meta: { title: "menu.dashboard", icon: "dashboard" }
       },
       {
         path: "/admin",
@@ -53,19 +53,19 @@ export const dynamicRouters = [
             path: "/admin/user",
             name: "user",
             component: () => import("@/views/admin/user/User"),
-            meta: { title: "menu.admin.user", permission: ["/admin/user/read"] }
+            meta: { title: "menu.admin.user", permission: ["admin/user/read"] }
           },
           {
             path: "/admin/role",
             name: "role",
             component: () => import("@/views/admin/role/Role"),
-            meta: { title: "menu.admin.role", permission: ["/admin/role/read"] }
+            meta: { title: "menu.admin.role", permission: ["admin/role/read"] }
           },
           {
             path: "/admin/security-log",
             name: "security-log",
             component: () => import("@/views/admin/security-log/SecurityLog"),
-            meta: { title: "menu.admin.security-log", permission: ["/admin/security-log/read"] }
+            meta: { title: "menu.admin.security-log", permission: ["admin/security-log/read"] }
           }
         ]
       }

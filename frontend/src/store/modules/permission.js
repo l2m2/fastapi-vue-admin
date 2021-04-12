@@ -1,10 +1,10 @@
-import { difference as _difference } from "lodash-es";
+import { cloneDeep as _cloneDeep } from "lodash-es";
 import store from "@/store";
 import { basicRouters, dynamicRouters } from "@/config/router.config";
 
 function hasPermission(router, permissions) {
   if (router.meta && router.meta.permission) {
-    return _difference(router.meta.permission, permissions);
+    return !router.meta.permission.some(val => permissions.indexOf(val) === -1);
   }
   return true;
 }
@@ -38,10 +38,13 @@ const actions = {
   generateRouters({ commit }, data) {
     return new Promise(resolve => {
       const { permissions } = data;
-      const accessedRouters = store.getters.username === "admin" ? dynamicRouters : filterRouters(dynamicRouters, permissions);
+      const accessedRouters = store.getters.username === "admin" ? dynamicRouters : filterRouters(_cloneDeep(dynamicRouters), permissions);
       commit("SET_ROUTERS", accessedRouters);
       resolve();
     });
+  },
+  clear({ commit }) {
+    commit("SET_ROUTERS", []);
   }
 };
 

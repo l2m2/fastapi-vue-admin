@@ -57,6 +57,8 @@ const actions = {
     });
   },
   logout({ commit }) {
+    commit("SET_USERNAME", "");
+    commit("SET_FULLNAME", "");
     commit("SET_PERMISSIONS", []);
     commit("SET_INFO", {});
     commit("SET_TOKEN", null);

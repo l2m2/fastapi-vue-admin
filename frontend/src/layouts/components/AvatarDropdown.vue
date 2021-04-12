@@ -30,10 +30,10 @@ export default {
       this.$confirm({
         title: this.$t("layouts.basic-layout.exit-dialog.title"),
         okText: this.$t("layouts.basic-layout.exit-dialog.ok"),
-        onOk: () => {
-          return this.$store.dispatch("user/logout").then(() => {
-            this.$router.push({ name: "login" });
-          });
+        onOk: async () => {
+          await this.$store.dispatch("permission/clear");
+          await this.$store.dispatch("user/logout");
+          this.$router.push({ name: "login" });
         }
       });
     }
