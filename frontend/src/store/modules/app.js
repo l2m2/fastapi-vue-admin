@@ -25,7 +25,7 @@ const state = {
   color: "",
   weak: false,
   multiTab: true,
-  lang: ""
+  lang: "zhcn"
 };
 
 const mutations = {
