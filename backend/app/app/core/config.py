@@ -31,6 +31,7 @@ class Settings(BaseSettings):
     )
 
   FIRST_SUPERUSER: str
+  FIRST_FULLNAME: str
   FIRST_SUPERUSER_PASSWORD: str
 
 

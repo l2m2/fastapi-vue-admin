@@ -19,6 +19,7 @@ def init_db(db: Session) -> None:
   if not user:
     user_in = schemas.UserCreate(
       username=settings.FIRST_SUPERUSER,
+      fullname=settings.FIRST_FULLNAME,
       password=settings.FIRST_SUPERUSER_PASSWORD,
       is_superuser=True,
     )
