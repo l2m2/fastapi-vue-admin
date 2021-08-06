@@ -1,16 +1,12 @@
-import secrets
 from pydantic import BaseSettings, AnyHttpUrl, PostgresDsn, validator
 from typing import List, Optional, Dict, Any
-
-from dotenv import load_dotenv, find_dotenv
-load_dotenv(find_dotenv())
 
 
 class Settings(BaseSettings):
   PROJECT_NAME: str
 
   API_V1_STR: str = "/api/v1"
-  SECRET_KEY: str = secrets.token_urlsafe(32)
+  SECRET_KEY: str = "f5826809b8460dffbed75f18ee165de587fe2a1b02383194ab43f34163e86dbe"
   # 60 minutes * 24 hours * 8 days = 8 days
   ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 8
   BACKEND_CORS_ORIGINS: List[AnyHttpUrl] = []

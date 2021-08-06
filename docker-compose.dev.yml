@@ -1,0 +1,49 @@
+version: "3.8"
+
+services: 
+  db: 
+    image: postgres:12
+    volumes: 
+      - app-db-data:/var/lib/postgresql/data/pgdata
+    env_file:
+      - backend/.env
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    networks:
+      - app-network
+    ports:
+      - "5432:5432"
+  
+  backend:
+    image: backend
+    depends_on: 
+      - db
+    env_file:
+      - backend/.env
+    build:
+      context: ./backend
+      dockerfile: backend.dockerfile
+    networks:
+      - app-network
+    ports:
+      - "8000:80"
+
+  frontend:
+    image: frontend
+    depends_on: 
+      - backend
+    build: 
+      context: ./frontend
+      args:
+        FRONTEND_ENV: development
+    ports:
+      - "80:80"
+    networks:
+      - app-network
+
+volumes: 
+  app-db-data:
+
+networks:
+  app-network:
+    driver: bridge
