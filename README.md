@@ -4,7 +4,7 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/l2m2/fastapi-vue-admin)
 
 
-[在线预览](http://8.142.66.90/)
+[在线预览](http://8.142.66.90:18080/)
 ![](misc/demo.png)
 
 ## 技术选型
